@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\time;
+use App\Models\Time;
 use Illuminate\Http\Request;
 
 class TimeController extends Controller

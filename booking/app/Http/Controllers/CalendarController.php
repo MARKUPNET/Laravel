@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Booking;
+use App\Models\booking;
 use Illuminate\Http\Request;
 
 class CalendarController extends Controller

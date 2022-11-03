@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\booking;
-use App\Models\guest;
-use App\Models\plan;
-use App\Models\time;
+use App\Models\Guest;
+use App\Models\Plan;
+use App\Models\Time;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller

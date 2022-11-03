@@ -40,7 +40,6 @@ class Booking extends Model
         return $this->belongsTo(Time::class);
     }
 
-
     /**
      *
      *
