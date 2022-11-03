@@ -25,13 +25,7 @@
 	<!-- for Bootstrap 5 -->
 
     <!-- css-->
-    <style>
-        .page-container{
-            margin: 0 auto;
-            width: 100%;
-            max-width: 980px;
-        }
-    </style>
+    <link href="{{ config('app.url', 'Laravel') }}:8000/css/style.css" rel="stylesheet">
     @yield('css')
 	<!-- css-->
 
@@ -42,6 +36,13 @@
         <div class="wrapper">
 
             <header class="site-header">
+
+                <div class="headerNavi d-flex align-items-center justify-content-between">
+                    <div class="logo"></div>
+                    <div class="gnavi">
+                        <a href="./admin/">ADMIN</a>
+                    </div>
+                </div>
 
                 @yield('content_header')
 
@@ -58,7 +59,7 @@
             <!-- /.site-container-->
 
             <footer class="site-footer">
-                <p class="text-center">copyright xxxxxx</p>
+                <p class="copyright">copyright xxxxxx</p>
             </footer>
             <!-- /.site-footer-->
 
