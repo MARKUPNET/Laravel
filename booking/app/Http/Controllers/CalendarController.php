@@ -25,9 +25,7 @@ class CalendarController extends Controller
      */
     public function index(Request $request)
     {
-        $bookingList = $this->booking->getAll()->toArray();
-
-        return view('/admin/calendar/index', compact('bookingList'));
+        return view('/admin/calendar/index');
     }
 
 

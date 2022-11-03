@@ -41,18 +41,6 @@ class Booking extends Model
     }
 
     /**
-     *
-     *
-     * @param  Request  $request
-     */
-    public function getAll()
-    {
-        $bookings = Booking::get();
-        return $bookings;
-    }
-
-
-    /**
      * Fullcalendar
      *
      */
@@ -80,11 +68,12 @@ class Booking extends Model
         //     ]
         // );
 
-        $bookingData = $this::orderBy('id', 'desc')->get();
-        $bookingList = array();
-        foreach( $bookingData as $key=>$item ){
-            $bookingList[$key]['title'] = $item->booking_plan." (".$item->booking_person.")";
-            $bookingList[$key]['start'] = $item->booking_date;
+        $bookings = $this->get();
+        $bookingList = [];
+        foreach( $bookings as $key=>$item ){
+            $bookingList[$key]['title'] = $item->guest->name." (".$item->person.")";
+            $bookingList[$key]['start'] = $item->date;
+            $bookingList[$key]['url'] = '/admin/booking/show'.$item->id;
         }
 
         return $bookingList;

@@ -17,7 +17,7 @@ class BookingsSeeder extends Seeder
     {
         DB::table('bookings')->insert([
             [
-                'date' => '2022-10-27',
+                'date' => '2022-11-01',
                 'time_id' => '1',
                 'guest_id' => '1',
                 'plan_id' => '1',
@@ -25,7 +25,7 @@ class BookingsSeeder extends Seeder
                 'note' => 'テキストテキストテキスト',
             ],
             [
-                'date' => '2022-10-28',
+                'date' => '2022-11-02',
                 'time_id' => '2',
                 'guest_id' => '2',
                 'plan_id' => '2',
@@ -33,7 +33,7 @@ class BookingsSeeder extends Seeder
                 'note' => 'テキストテキストテキスト',
             ],
             [
-                'date' => '2022-10-29',
+                'date' => '2022-11-03',
                 'time_id' => '3',
                 'guest_id' => '3',
                 'plan_id' => '3',
@@ -41,7 +41,7 @@ class BookingsSeeder extends Seeder
                 'note' => 'テキストテキストテキスト',
             ],
             [
-                'date' => '2022-10-27',
+                'date' => '2022-11-08',
                 'time_id' => '4',
                 'guest_id' => '1',
                 'plan_id' => '1',
@@ -49,7 +49,7 @@ class BookingsSeeder extends Seeder
                 'note' => 'テキストテキストテキスト',
             ],
             [
-                'date' => '2022-10-28',
+                'date' => '2022-11-09',
                 'time_id' => '5',
                 'guest_id' => '2',
                 'plan_id' => '2',
@@ -57,7 +57,7 @@ class BookingsSeeder extends Seeder
                 'note' => 'テキストテキストテキスト',
             ],
             [
-                'date' => '2022-10-29',
+                'date' => '2022-11-10',
                 'time_id' => '6',
                 'guest_id' => '3',
                 'plan_id' => '3',
@@ -65,7 +65,7 @@ class BookingsSeeder extends Seeder
                 'note' => 'テキストテキストテキスト',
             ],
             [
-                'date' => '2022-10-27',
+                'date' => '2022-11-27',
                 'time_id' => '7',
                 'guest_id' => '1',
                 'plan_id' => '1',
@@ -73,7 +73,7 @@ class BookingsSeeder extends Seeder
                 'note' => 'テキストテキストテキスト',
             ],
             [
-                'date' => '2022-10-28',
+                'date' => '2022-11-17',
                 'time_id' => '8',
                 'guest_id' => '2',
                 'plan_id' => '2',
@@ -81,7 +81,7 @@ class BookingsSeeder extends Seeder
                 'note' => 'テキストテキストテキスト',
             ],
             [
-                'date' => '2022-10-29',
+                'date' => '2022-11-18',
                 'time_id' => '9',
                 'guest_id' => '3',
                 'plan_id' => '3',
@@ -89,7 +89,7 @@ class BookingsSeeder extends Seeder
                 'note' => 'テキストテキストテキスト',
             ],
             [
-                'date' => '2022-10-27',
+                'date' => '2022-11-19',
                 'time_id' => '10',
                 'guest_id' => '1',
                 'plan_id' => '1',
