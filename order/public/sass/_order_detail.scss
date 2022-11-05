@@ -1,0 +1,10 @@
+.orderTable{
+    margin: 20px 0;
+
+    dt{
+
+        &::before{
+            content: "■";
+        }
+    }
+}
