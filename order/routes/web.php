@@ -18,8 +18,8 @@ Route::get('/', [App\Http\Controllers\PageController::class, 'index'])->name('in
 
 // ご注文
 Route::get('/shopping', [App\Http\Controllers\ShoppingController::class, 'index'])->name('shopping.index');
-Route::get('/shopping/confirm', [App\Http\Controllers\ShoppingController::class, 'confirm'])->name('shopping.confirm');
-Route::get('/shopping/thanks', [App\Http\Controllers\ShoppingController::class, 'thanks'])->name('shopping.thanks');
+Route::post('/shopping/confirm', [App\Http\Controllers\ShoppingController::class, 'confirm'])->name('shopping.confirm');
+Route::post('/shopping/thanks', [App\Http\Controllers\ShoppingController::class, 'thanks'])->name('shopping.thanks');
 
 // 管理画面
 Auth::routes();

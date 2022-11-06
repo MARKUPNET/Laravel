@@ -37,6 +37,7 @@
                                 <li><a href="{{ route('shopping.index') }}">かりんとう饅頭</a></li>
                                 <li><a href="#">〇〇〇〇〇</a></li>
                                 <li><a href="#">〇〇〇〇〇</a></li>
+                                <li><a href="{{ route('admin.index') }}">管理画面</a></li>
                             </ul>
                         </nav>
                     </div>
