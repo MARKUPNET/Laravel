@@ -22,5 +22,13 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(UsersSeeder::class);
+        $this->call(ProductSeeder::class);
+        $this->call(ItemSeeder::class);
+        $this->call(OrderSeeder::class);
+        $this->call(QuantitySeeder::class);
+        $this->call(GuestSeeder::class);
+        $this->call(NoshiSeeder::class);
+        $this->call(DeliverySeeder::class);
+
     }
 }
