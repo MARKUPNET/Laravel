@@ -17,7 +17,7 @@ class GuestSeeder extends Seeder
     {
         DB::table('guests')->insert([
             [
-                'order_id'  => '1',
+                'orders_id'  => '1',
                 'name'      => '山田太郎',
                 'kana'      => 'ヤマダタロウ',
                 'phone'     => '09000000000',

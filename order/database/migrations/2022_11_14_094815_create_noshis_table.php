@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('noshis', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBigInteger('orders_id')->comment('注文ID');
             $table->foreign('orders_id')->references('id')->on('orders');
 
@@ -23,7 +24,7 @@ return new class extends Migration
             $table->string('color')->comment('のし色')->nullable();
             $table->string('position')->comment('のし位置')->nullable();
             $table->string('name')->comment('氏名')->nullable();
-            $table->string('note')->comment('備考')->nullable();
+            $table->text('note')->comment('備考')->nullable();
 
             $table->timestamps();
         });

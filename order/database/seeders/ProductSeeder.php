@@ -19,6 +19,12 @@ class ProductSeeder extends Seeder
             [
                 'name' => 'かりんとう饅頭',
             ],
+            [
+                'name' => 'ながぬま ふ輪っと',
+            ],
+            [
+                'name' => 'あかねいろマドレーヌ',
+            ],
 
         ]);
     }

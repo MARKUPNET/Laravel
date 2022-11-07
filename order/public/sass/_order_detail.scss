@@ -57,13 +57,19 @@ textarea{
         display: inline-block;
     }
 
-    input[type="number"]{
+    input[type="text"]{
         margin-right: 5px;
         width: 5em;
+        text-align: right;
     }
 }
 
 .priceSumBox{
+
+    input[type="text"]{
+        margin-right: 5px;
+        text-align: right;
+    }
 
     .caution{
         display: block;

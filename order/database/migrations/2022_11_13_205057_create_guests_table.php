@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('guests', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('order_id')->comment('注文ID');
-            $table->foreign('order_id')->references('id')->on('orders');
+            $table->unsignedBigInteger('orders_id')->comment('注文ID');
+            $table->foreign('orders_id')->references('id')->on('orders');
 
             $table->string('name')->comment('名前');
             $table->string('kana')->comment('フリガナ')->nullable();

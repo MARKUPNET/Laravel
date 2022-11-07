@@ -3,27 +3,36 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Item;
 
+use Mail;
+use App\Mail\OrderSendmail;
 class ShoppingController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
+     * __construct
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function index()
+    public function __construct()
     {
-        return view('shopping');
     }
+
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function confirm()
+    public function index(Request $request, $product_id)
     {
-        return view('shopping_confirm');
+        $product = Product::where('id', $product_id)->first();
+        $items = Item::where('product_id', $product_id)->get();
+        // dd($items);
+
+        return view('shopping', compact('product','items'));
     }
 
     /**
@@ -31,74 +40,59 @@ class ShoppingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function thanks()
+    public function confirm(Request $request)
     {
-        return view('shopping_thanks');
+        $request->validate([
+        ]);
+
+        $inputs = $request->all();
+
+        return view('shopping_confirm', compact('inputs'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function send(Request $request)
     {
-        //
+        //フォームから受け取ったactionの値を取得
+        $action = $request->input('action');
+
+        //フォームから受け取ったactionを除いたinputの値を取得
+        $inputs = $request->except('action');
+
+        //actionの値で分岐
+        if($action !== 'submit'){
+            return redirect()
+                ->back()
+                ->withInput($inputs);
+
+        } else {
+
+            //入力されたデータをデータベースに保存
+            // $this->dataSave($inputs);
+
+            //入力されたメールアドレスにメールを送信
+            Mail::send(new OrderSendmail($inputs));
+
+            //再送信を防ぐためにトークンを再発行
+            $request->session()->regenerateToken();
+
+            return view('shopping_thanks');
+
+        }
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Show the application thanks.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function store(Request $request)
+    public function dataSave($inputs)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $guest = new Guest;
+        $guest->save();
     }
 }

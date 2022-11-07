@@ -6,9 +6,11 @@
 
 @section('content')
     <ul class="products">
-        <li><a href="{{ route('shopping.index') }}">かりんとう饅頭</a></li>
-        <li><a href="#">〇〇〇〇〇</a></li>
-        <li><a href="#">〇〇〇〇〇</a></li>
+
+        @foreach( $products as $product)
+        <li><a href="{{ route('shopping.index', $product->id) }}">{{ $product->name }}</a></li>
+        @endforeach
+
     </ul>
 @endsection
 

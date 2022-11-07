@@ -7,48 +7,34 @@
 @section('content')
     <form action="{{ route('shopping.confirm') }}" method="POST">
 
-        @CSRF
+        @csrf
+
+        <input type="hidden" name="product_id" value="{{ $product->id }}">
 
         <div class="card">
             <h2>ご注文</h2>
 
             <dl class="orderTable">
                 <dt>商品名</dt>
-                <dd>長沼かりんとう饅頭</dd>
+                <dd>
+                    {{ $product->name }}
+                    <input type="hidden" name="product_name" value="{{ $product->name }}">
+                </dd>
             </dl>
 
             <dl class="orderTable">
                 <dt>サイズ・数量</dt>
                 <dd>
                     <ul class="productList">
+                        @foreach($items as $item)
                         <li>
-                            <span>5本入り（700円）・・・</span>
-                            <input name="長沼かりんとう饅頭（5本入り）" type="number" value="" class="orderNet" data-charcheck="digit" data-format="$1 箱" data-price="700" autocomplete="off">箱
+                            <span>{{ $item->name }}（{{ $item->price }}円）・・・</span>
+                            <input name="{{ $item->name }}" type="text" value="" class="orderNet"
+                                data-charcheck="digit"
+                                data-format="$1 箱"
+                                data-price="{{ $item->price }}">{{ $item->unit }}
                         </li>
-                        <li>
-                            <span>8本入り（1,130円）・・・</span>
-                            <input name="長沼かりんとう饅頭（8本入り）" type="number" value="" class="orderNet" data-charcheck="digit" data-format="$1 箱" data-price="1130" autocomplete="off">箱
-                        </li>
-                        <li>
-                            <span>10本入り（1,500円）・・・</span>
-                            <input name="長沼かりんとう饅頭（10本入り）" type="number" value="" class="orderNet" data-charcheck="digit" data-format="$1 箱" data-price="1500" autocomplete="off">箱
-                        </li>
-                        <li>
-                            <span>15本入り（2,200円）・・・</span>
-                            <input name="長沼かりんとう饅頭（15本入り）" type="number" value="" class="orderNet" data-charcheck="digit" data-format="$1 箱" data-price="2200" autocomplete="off">箱
-                        </li>
-                        <li>
-                            <span>20本入り（2,900円）・・・</span>
-                            <input name="長沼かりんとう饅頭（20本入り）" type="number" value="" class="orderNet" data-charcheck="digit" data-format="$1 箱" data-price="2900" autocomplete="off">箱
-                        </li>
-                        <li>
-                            <span>27本入り（3,810円）・・・</span>
-                            <input name="長沼かりんとう饅頭（27本入り）" type="number" value="" class="orderNet" data-charcheck="digit" data-format="$1 箱" data-price="3810" autocomplete="off">箱
-                        </li>
-                        <li>
-                            <span>簡易包装(5本入り4パックセット 2,200円)・・・</span>
-                            <input name="長沼かりんとう饅頭（簡易包装5本入り4パックセット）" type="number" value="" class="orderNet" data-charcheck="digit" data-format="$1 セット" data-price="2200" autocomplete="off">箱
-                        </li>
+                        @endforeach
                     </ul>
                 </dd>
             </dl>
@@ -57,9 +43,8 @@
                 <dt>商品合計金額</dt>
                 <dd>
                     <div class="priceSumBox">
-                        <input type="hidden" name="合計金額" data-join="合計+ 円">
                         <span id="priceSum">
-                            <input type="number" name="合計" value="0" class="total_sum" autocomplete="off">円（税込）
+                            <input type="text" name="price_sum" value="0" class="total_sum">円（税込）
                             <span class="caution">※別途送料がかかります。送料を含めた合計金額は後ほど、ご連絡差し上げます。</span>
                         </span>
                     </div>
@@ -85,8 +70,8 @@
                     <dt>【　の　し　】</dt>
                     <dd>
                         <div class="optSelcBtn">
-                            <label><input type="radio" name="noshi" value="あり">あり</label>
-                            <label><input type="radio" name="noshi" value="なし" checked>なし</label>
+                            <label><input type="radio" name="opt_noshi_status" value="1">あり</label>
+                            <label><input type="radio" name="opt_noshi_status" value="0" checked>なし</label>
                         </div>
                     </dd>
                 </dl>
@@ -94,7 +79,7 @@
                 <div id="noshi" class="optionDetail">
 
                     <dl class="orderTable">
-                        <dt>のし種類</dt>
+                        <dt>（のし）種類</dt>
                         <dd>
                             <ul class="optNoshiType">
                                 <li>
@@ -131,7 +116,7 @@
                     </dl>
 
                     <dl class="orderTable">
-                        <dt>のし（結び切り　色）</dt>
+                        <dt>（のし）結び切り　色</dt>
                         <dd>
                             <label><input name="opt_noshi_color" type="radio" value="なし" checked>なし</label>
                             <label><input name="opt_noshi_color" type="radio" value="紅白">紅白</label>
@@ -141,22 +126,23 @@
                     </dl>
 
                     <dl class="orderTable">
-                        <dt>のし位置</dt>
+                        <dt>（のし）位置</dt>
                         <dd>
+                            <label><input name="opt_noshi_position" type="radio" value="なし" checked>なし</label>
                             <label><input name="opt_noshi_position" type="radio" value="内のし（包装紙の内にのしを敷く）">内のし（包装紙の内にのしを敷く）</label>
                             <label><input name="opt_noshi_position" type="radio" value="外のし（包装紙の外にのしを敷く）">外のし（包装紙の外にのしを敷く）</label>
                         </dd>
                     </dl>
 
                     <dl class="orderTable">
-                        <dt>氏名</dt>
+                        <dt>（のし）氏名</dt>
                         <dd>
                             <input name="opt_noshi_name" type="text" placeholder="(例)　山田　太郎">
                         </dd>
                     </dl>
 
                     <dl class="orderTable">
-                        <dt>備考</dt>
+                        <dt>（のし）備考</dt>
                         <dd>
                             <textarea name="opt_noshi_note"></textarea>
                         </dd>
@@ -168,8 +154,8 @@
                     <dt>【　送付先　】</dt>
                     <dd>
                         <div class="optSelcBtn">
-                            <label><input type="radio" name="delivery" value="別住所">別住所</label>
-                            <label><input type="radio" name="delivery" value="お客様情報と同じ" checked>お客様情報と同じ</label>
+                            <label><input type="radio" name="opt_delivery_status" value="1">別住所</label>
+                            <label><input type="radio" name="opt_delivery_status" value="0" checked>お客様情報と同じ</label>
                         </div>
                     </dd>
                 </dl>
@@ -179,28 +165,28 @@
                     <dl class="orderTable">
                         <dt>（送付先）お名前</dt>
                         <dd>
-                            <input name="delivery_name" type="text">
+                            <input name="opt_delivery_name" type="text">
                         </dd>
                     </dl>
                     <dl class="orderTable">
                         <dt>（送付先）フリガナ</dt>
                         <dd>
-                            <input name="delivery_kana" type="text">
+                            <input name="opt_delivery_kana" type="text">
                         </dd>
                     </dl>
                     <dl class="orderTable">
                         <dt>（送付先）お電話番号</dt>
                         <dd>
-                            <input name="delivery_phone" type="text">
+                            <input name="opt_delivery_phone" type="text">
                         </dd>
                     </dl>
                     <dl class="orderTable">
                         <dt>（送付先）ご住所</dt>
                         <dd>
                             <div class="address">
-                                <label>（送付先）郵便番号：<input type="text" name="delivery_zip" placeholder=""></label>
+                                <label>（送付先）郵便番号：<input type="text" name="opt_delivery_zip" placeholder=""></label>
                                 <label>（送付先）都道府県：
-                                    <select name="delivery_pref">
+                                    <select name="opt_delivery_pref">
                                         <option value="" selected="selected">選択してください</option>
                                         <option value="北海道">北海道</option>
                                         <option value="青森県">青森県</option>
@@ -251,8 +237,8 @@
                                         <option value="沖縄県">沖縄県</option>
                                     </select>
                                 </label>
-                                <label>（送付先）丁目番地：<input type="text" name="delivery_addr" placeholder=""></label>
-                                <label>（送付先）建物名等：<input type="text" name="delivery_addr2" placeholder=""></label>
+                                <label>（送付先）丁目番地：<input type="text" name="opt_delivery_addr" placeholder=""></label>
+                                <label>（送付先）建物名等：<input type="text" name="opt_delivery_addr2" placeholder=""></label>
                             </div>
                         </dd>
                     </dl>
@@ -271,14 +257,17 @@
             <dl class="orderTable">
                 <dt>お名前<span class="hissu">必須</span></dt>
                 <dd>
-                    <input type="text" name="customer_name" placeholder="例)森下　太郎">
+                    <input type="text" name="customer_name" placeholder="例)山田　太郎">
+                    @error('customer_name')
+                    <p style="color: #f00;">必須項目です</p>
+                    @enderror
                 </dd>
             </dl>
 
             <dl class="orderTable">
                 <dt>フリガナ</dt>
                 <dd>
-                    <input type="text" name="customer_kana" placeholder="例)モリシタ　タロウ">
+                    <input type="text" name="customer_kana" placeholder="例)ヤマダ　タロウ">
                 </dd>
             </dl>
 
@@ -286,6 +275,9 @@
                 <dt>お電話番号<span class="hissu">必須</span></dt>
                 <dd>
                     <input type="text" name="customer_phone" placeholder="例)0123-88-0051">
+                    @error('customer_phone')
+                    <p style="color: #f00;">必須項目です</p>
+                    @enderror
                 </dd>
             </dl>
 
@@ -348,6 +340,9 @@
                         </label>
                         <label>丁目番地：<input type="text" name="customer_addr" placeholder=""></label>
                         <label>建物名等：<input type="text" name="customer_addr2" placeholder=""></label>
+                        @error('customer_zip')
+                        <p style="color: #f00;">必須項目です</p>
+                        @enderror
                     </div>
                 </dd>
             </dl>
@@ -356,6 +351,9 @@
                 <dt>E-mail<span class="hissu">必須</span></dt>
                 <dd>
                     <input type="text" name="customer_email" placeholder="">
+                    @error('customer_email')
+                    <p style="color: #f00;">必須項目です</p>
+                    @enderror
                 </dd>
             </dl>
 
@@ -372,11 +370,16 @@
                     <div>
                         <p>個人情報の取り扱いにつきましては、<a href="https://msyofuan.com/privacy">こちら</a>をご覧ください。</p>
                         <label><input type="checkbox" name="customer_privacy" value="同意します">個人情報の取り扱いについて同意をします。</label>
+                        @error('customer_privacy')
+                        <p style="color: #f00;">必須項目です</p>
+                        @enderror
                     </div>
                 </dd>
             </dl>
 
-            <button type="submit" class="btn_submit">確認する</button>
+            <div class="submitButtons">
+                <button type="submit" class="btn_submit">確認する</button>
+            </div>
 
         </div>
 
@@ -409,15 +412,15 @@
                     }
                 });
                 total_sum = total_sum.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-                $("input[name='合計']").val(total_sum);
+                $("input[name='price_sum']").val(total_sum);
             });
         }
 
         /*オプション　のし*/
         var Noshi = function () {
-            $('input[name="noshi"]:radio').change(function () {
+            $('input[name="opt_noshi_status"]:radio').change(function () {
                 var radioval = $(this).val();
-                if (radioval == 'あり') {
+                if (radioval == '1') {
                     $('#noshi').addClass('open');
                 } else {
                     $('#noshi').removeClass('open');
@@ -427,9 +430,9 @@
 
         /*オプション　送付先*/
         var delivery = function () {
-            $('input[name="delivery"]:radio').change(function () {
+            $('input[name="opt_delivery_status"]:radio').change(function () {
                 var radioval = $(this).val();
-                if (radioval == '別住所') {
+                if (radioval == '1') {
                     $('#delivery').addClass('open');
                 } else {
                     $('#delivery').removeClass('open');

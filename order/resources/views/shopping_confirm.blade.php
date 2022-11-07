@@ -7,14 +7,17 @@
 @section('content')
     <form action="{{ route('shopping.thanks') }}" method="POST">
 
-        @CSRF
+        @csrf
 
         <div class="card">
             <h2>ご注文</h2>
 
             <dl class="orderTable">
                 <dt>商品名</dt>
-                <dd>長沼かりんとう饅頭</dd>
+                <dd>
+                    {{ $inputs['product_name'] }}
+                    <input type="hidden" name="product_name" value="{{ $inputs['product_name'] }}">
+                </dd>
             </dl>
 
             <dl class="orderTable">
@@ -24,30 +27,6 @@
                         <li>
                             <span>5本入り（700円）・・・</span> 0 箱
                             <input name="長沼かりんとう饅頭（5本入り）" type="hidden" value="0">
-                        </li>
-                        <li>
-                            <span>8本入り（1,130円）・・・</span> 0 箱
-                            <input name="長沼かりんとう饅頭（8本入り）" type="hidden" value="0">
-                        </li>
-                        <li>
-                            <span>10本入り（1,500円）・・・</span> 0 箱
-                            <input name="長沼かりんとう饅頭（10本入り）" type="hidden" value="0">
-                        </li>
-                        <li>
-                            <span>15本入り（2,200円）・・・</span> 0 箱
-                            <input name="長沼かりんとう饅頭（15本入り）" type="hidden" value="0">
-                        </li>
-                        <li>
-                            <span>20本入り（2,900円）・・・</span> 0 箱
-                            <input name="長沼かりんとう饅頭（20本入り）" type="hidden" value="0">
-                        </li>
-                        <li>
-                            <span>27本入り（3,810円）・・・</span> 0 箱
-                            <input name="長沼かりんとう饅頭（27本入り）" type="hidden" value="0">
-                        </li>
-                        <li>
-                            <span>簡易包装(5本入り4パックセット 2,200円)・・・</span> 0 箱
-                            <input name="長沼かりんとう饅頭（簡易包装5本入り4パックセット）" type="hidden" value="0">
                         </li>
                     </ul>
                 </dd>
@@ -73,8 +52,8 @@
                     <dt>【　の　し　】</dt>
                     <dd>
                         <div class="optSelcBtn">
-                            あり
-                            <input type="hidden" name="noshi" value="あり">
+                            {{ $inputs['opt_noshi_status'] }}
+                            <input type="hidden" name="opt_noshi_status" value="{{ $inputs['opt_noshi_status'] }}">
                         </div>
                     </dd>
                 </dl>
@@ -84,40 +63,40 @@
                     <dl class="orderTable">
                         <dt>のし種類</dt>
                         <dd>
-                            なし
-                            <input type="hidden" name="opt_noshi_type" value="なし">
+                            {{ $inputs['opt_noshi_type'] }}
+                            <input type="hidden" name="opt_noshi_type" value="{{ $inputs['opt_noshi_type'] }}">
                         </dd>
                     </dl>
 
                     <dl class="orderTable">
                         <dt>のし（結び切り　色）</dt>
                         <dd>
-                            なし
-                            <input type="hidden" name="opt_noshi_color" value="なし">
+                            {{ $inputs['opt_noshi_color'] }}
+                            <input type="hidden" name="opt_noshi_color" value="{{ $inputs['opt_noshi_color'] }}">
                         </dd>
                     </dl>
 
                     <dl class="orderTable">
                         <dt>のし位置</dt>
                         <dd>
-                            なし
-                            <input type="hidden" name="opt_noshi_position" value="">
+                            {{ $inputs['opt_noshi_position'] }}
+                            <input type="hidden" name="opt_noshi_position" value="{{ $inputs['opt_noshi_position'] }}">
                         </dd>
                     </dl>
 
                     <dl class="orderTable">
                         <dt>氏名</dt>
                         <dd>
-                            山田　太郎
-                            <input type="hidden" name="opt_noshi_name" value="山田　太郎">
+                            {{ $inputs['opt_noshi_name'] }}
+                            <input type="hidden" name="opt_noshi_name" value="{{ $inputs['opt_noshi_name'] }}">
                         </dd>
                     </dl>
 
                     <dl class="orderTable">
                         <dt>備考</dt>
                         <dd>
-                            ここに文章を入力します。
-                            <input type="hidden" name="opt_noshi_note" value="ここに文章を入力します。">
+                            {{ $inputs['opt_noshi_note'] }}
+                            <input type="hidden" name="opt_noshi_note" value="{{ $inputs['opt_noshi_note'] }}">
                         </dd>
                     </dl>
 
@@ -127,8 +106,8 @@
                     <dt>【　送付先　】</dt>
                     <dd>
                         <div class="optSelcBtn">
-                            別住所
-                            <input type="hidden" name="delivery" value="別住所">
+                            {{ $inputs['opt_delivery_status'] }}
+                            <input type="hidden" name="opt_delivery_status" value="{{ $inputs['opt_delivery_status'] }}">
                         </div>
                     </dd>
                 </dl>
@@ -137,37 +116,37 @@
                     <dl class="orderTable">
                         <dt>（送付先）お名前</dt>
                         <dd>
-                            山田　太郎
-                            <input type="hidden" name="delivery_name" value="山田　太郎">
+                            {{ $inputs['opt_delivery_name'] }}
+                            <input type="hidden" name="opt_delivery_name" value="{{ $inputs['opt_delivery_name'] }}">
                         </dd>
                     </dl>
                     <dl class="orderTable">
                         <dt>（送付先）フリガナ</dt>
                         <dd>
-                            山田　太郎
-                            <input type="hidden" name="delivery_kana" value="ヤマダ　タロウ">
+                            {{ $inputs['opt_delivery_kana'] }}
+                            <input type="hidden" name="opt_delivery_name" value="{{ $inputs['opt_delivery_kana'] }}">
                         </dd>
                     </dl>
                     <dl class="orderTable">
                         <dt>（送付先）お電話番号</dt>
                         <dd>
-                            090-0000-0000
-                            <input type="hidden" name="delivery_phone" value="090-0000-0000">
+                            {{ $inputs['opt_delivery_phone'] }}
+                            <input type="hidden" name="opt_delivery_phone" value="{{ $inputs['opt_delivery_phone'] }}">
                         </dd>
                     </dl>
                     <dl class="orderTable">
                         <dt>（送付先）ご住所</dt>
                         <dd>
                             <div class="address">
-                                <input type="hidden" name="delivery_zip" value="〇〇〇〇〇〇〇〇〇〇〇">
-                                <input type="hidden" name="delivery_pref" value="〇〇〇〇〇〇〇〇〇〇〇">
-                                <input type="hidden" name="delivery_addr" value="〇〇〇〇〇〇〇〇〇〇〇">
-                                <input type="hidden" name="delivery_addr2" value="〇〇〇〇〇〇〇〇〇〇〇">
+                                <input type="hidden" name="opt_delivery_zip" value="{{ $inputs['opt_delivery_zip'] }}">
+                                <input type="hidden" name="opt_delivery_pref" value="{{ $inputs['opt_delivery_pref'] }}">
+                                <input type="hidden" name="opt_delivery_addr" value="{{ $inputs['opt_delivery_addr'] }}">
+                                <input type="hidden" name="opt_delivery_addr2" value="{{ $inputs['opt_delivery_addr2'] }}">
 
-                                <label>（送付先）郵便番号：〇〇〇〇〇〇〇〇〇〇〇</label>
-                                <label>（送付先）都道府県：〇〇〇〇〇〇〇〇〇〇〇</label>
-                                <label>（送付先）丁目番地：〇〇〇〇〇〇〇〇〇〇〇</label>
-                                <label>（送付先）建物名等：〇〇〇〇〇〇〇〇〇〇〇</label>
+                                <label>（送付先）郵便番号：{{ $inputs['opt_delivery_zip'] }}</label>
+                                <label>（送付先）都道府県：{{ $inputs['opt_delivery_pref'] }}</label>
+                                <label>（送付先）丁目番地：{{ $inputs['opt_delivery_addr'] }}</label>
+                                <label>（送付先）建物名等：{{ $inputs['opt_delivery_addr2'] }}</label>
                             </div>
                         </dd>
                     </dl>
@@ -182,24 +161,24 @@
             <dl class="orderTable">
                 <dt>お名前</dt>
                 <dd>
-                    森下　太郎
-                    <input type="hidden" name="customer_name" value="森下　太郎">
+                    {{ $inputs['customer_name'] }}
+                    <input type="hidden" name="customer_name" value="{{ $inputs['customer_name'] }}">
                 </dd>
             </dl>
 
             <dl class="orderTable">
                 <dt>フリガナ</dt>
                 <dd>
-                    モリシタ　タロウ
-                    <input type="hidden" name="customer_kana" value="モリシタ　タロウ">
+                    {{ $inputs['customer_kana'] }}
+                    <input type="hidden" name="customer_kana" value="{{ $inputs['customer_kana'] }}">
                 </dd>
             </dl>
 
             <dl class="orderTable">
                 <dt>お電話番号</dt>
                 <dd>
-                    0123-88-0051
-                    <input type="hidden" name="customer_phone" value="0123-88-0051">
+                    {{ $inputs['customer_phone'] }}
+                    <input type="hidden" name="customer_phone" value="{{ $inputs['customer_phone'] }}">
                 </dd>
             </dl>
 
@@ -207,14 +186,14 @@
                 <dt>ご住所</dt>
                 <dd>
                     <div class="address">
-                        <input type="hidden" name="customer_zip" value="〇〇〇〇〇〇〇〇〇〇〇">
-                        <input type="hidden" name="customer_pref" value="〇〇〇〇〇〇〇〇〇〇〇">
-                        <input type="hidden" name="customer_addr" value="〇〇〇〇〇〇〇〇〇〇〇">
-                        <input type="hidden" name="customer_addr2" value="〇〇〇〇〇〇〇〇〇〇〇">
-                        <label>（送付先）郵便番号：〇〇〇〇〇〇〇〇〇〇〇</label>
-                        <label>（送付先）都道府県：〇〇〇〇〇〇〇〇〇〇〇</label>
-                        <label>（送付先）丁目番地：〇〇〇〇〇〇〇〇〇〇〇</label>
-                        <label>（送付先）建物名等：〇〇〇〇〇〇〇〇〇〇〇</label>
+                        <input type="hidden" name="customer_zip" value="{{ $inputs['customer_zip'] }}">
+                        <input type="hidden" name="customer_pref" value="{{ $inputs['customer_pref'] }}">
+                        <input type="hidden" name="customer_addr" value="{{ $inputs['customer_addr'] }}">
+                        <input type="hidden" name="customer_addr2" value="{{ $inputs['customer_addr2'] }}">
+                        <label>郵便番号：{{ $inputs['customer_zip'] }}</label>
+                        <label>都道府県：{{ $inputs['customer_pref'] }}</label>
+                        <label>丁目番地：{{ $inputs['customer_addr'] }}</label>
+                        <label>建物名等：{{ $inputs['customer_addr2'] }}</label>
                     </div>
                 </dd>
             </dl>
@@ -222,16 +201,16 @@
             <dl class="orderTable">
                 <dt>E-mail</dt>
                 <dd>
-                    xxxxxx@xxx.jp
-                    <input type="hidden" name="customer_email" value="xxxxxx@xxx.jp">
+                    {{ $inputs['customer_email'] }}
+                    <input type="hidden" name="customer_email" value="{{ $inputs['customer_email'] }}">
                 </dd>
             </dl>
 
             <dl class="orderTable">
                 <dt>備考欄(その他ご質問など)</dt>
                 <dd>
-                    xxxxxx
-                    <input type="hidden" name="customer_note" value="xxxxxx">
+                    {{ $inputs['customer_note'] }}
+                    <input type="hidden" name="customer_note" value="{{ $inputs['customer_note'] }}">
                 </dd>
             </dl>
 
@@ -243,7 +222,10 @@
                 </dd>
             </dl>
 
-            <button type="submit" class="btn_submit">送信する</button>
+            <div class="submitButtons">
+                <button type="submit" name="action" value="back" class="btn_submit">入力内容修正</button>
+                <button type="submit" name="action" value="submit" class="btn_submit">送信</button>
+            </div>
 
         </div>
 

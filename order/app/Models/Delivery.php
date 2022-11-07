@@ -8,4 +8,28 @@ use Illuminate\Database\Eloquent\Model;
 class Delivery extends Model
 {
     use HasFactory;
+
+    // モデルに関連付けるテーブル
+    protected $table = 'deliveries';
+
+    // テーブルに関連付ける主キー
+    protected $primaryKey = 'id';
+
+    // 登録・更新可能なカラムの指定
+    protected $fillable = [
+        'orders_id',
+        'status',
+        'name',
+        'kana',
+        'phone',
+        'zip',
+        'pref',
+        'addr1',
+        'addr2',
+    ];
+
+    public function order()
+    {
+        return $this->hasMany(Oder::class);
+    }
 }
