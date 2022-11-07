@@ -30,6 +30,6 @@ class Guest extends Model
 
     public function order()
     {
-        return $this->hasMany(Oder::class);
+        return $this->belongsTo(Oder::class);
     }
 }

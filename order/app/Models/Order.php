@@ -23,26 +23,26 @@ class Order extends Model
 
     public function product()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Product::class);
     }
 
     public function guest()
     {
-        return $this->belongsTo(Guest::class);
+        return $this->hasMany(Guest::class);
     }
 
     public function noshi()
     {
-        return $this->belongsTo(Noshi::class);
+        return $this->hasMany(Noshi::class);
     }
 
     public function delivery()
     {
-        return $this->belongsTo(Delivery::class);
+        return $this->hasMany(Delivery::class);
     }
 
     public function quantity()
     {
-        return $this->belongsTo(Quantity::class);
+        return $this->hasMany(Quantity::class);
     }
 }

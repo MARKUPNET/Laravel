@@ -29,7 +29,7 @@ class ShoppingController extends Controller
     public function index(Request $request, $product_id)
     {
         $product = Product::where('id', $product_id)->first();
-        $items = Item::where('product_id', $product_id)->get();
+        $items = Item::where('products_id', $product_id)->get();
         // dd($items);
 
         return view('shopping', compact('product','items'));

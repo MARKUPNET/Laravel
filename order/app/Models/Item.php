@@ -25,11 +25,11 @@ class Item extends Model
 
     public function quantity()
     {
-        return $this->belongsTo(Quantity::class);
+        return $this->hasMany(Quantity::class);
     }
 
     public function product()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Product::class);
     }
 }
