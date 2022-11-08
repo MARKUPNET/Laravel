@@ -52,7 +52,6 @@ class ShoppingController extends Controller
             'customer_privacy'     => 'required',
         ]);
 
-
         $inputs = $request->all();
 
         $items = Item::where('products_id', $inputs['product_id'])->get();

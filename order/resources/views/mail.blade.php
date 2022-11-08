@@ -9,7 +9,8 @@
 @endforeach
 <br>
 【　商品合計金額　】<br>
-{!! $price_sum !!}<br>
+<br>
+{!! $price_sum !!} 円<br>
 <br>
 <br>
 ------------------------<br>
@@ -68,7 +69,8 @@
 @endif
 ------------------------<br>
 <br>
-【　お客様情報　】
+【　お客様情報　】<br>
+<br>
 ■お名前<br>
 {!! $customer_name !!}<br>
 <br>

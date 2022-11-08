@@ -5,6 +5,14 @@
 @stop
 
 @section('content')
+    <div class="shoppingFlow">
+        <ul>
+            <li class="current"><span>ご注文</span></li>
+            <li class="current"><span>確認</span></li>
+            <li><span>送信</span></li>
+        </ul>
+    </div>
+
     <form action="{{ route('shopping.thanks') }}" method="POST">
 
         @csrf

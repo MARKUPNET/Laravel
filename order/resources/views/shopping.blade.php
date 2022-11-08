@@ -5,17 +5,24 @@
 @stop
 
 @section('content')
+    <div class="shoppingFlow">
+        <ul>
+            <li class="current"><span>ご注文</span></li>
+            <li><span>確認</span></li>
+            <li><span>送信</span></li>
+        </ul>
+    </div>
+
     <form action="{{ route('shopping.confirm') }}" method="POST">
 
         @csrf
 
         <div class="card">
-            <h2>ご注文</h2>
 
             <dl class="orderTable">
                 <dt>商品名</dt>
                 <dd>
-                    {{ $product->name }}
+                    <p class="product_name">{{ $product->name }}</p>
                     <input type="hidden" name="product_name" value="{{ $product->name }}">
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                 </dd>
@@ -134,14 +141,14 @@
                     <dl class="orderTable">
                         <dt>（のし）氏名</dt>
                         <dd>
-                            <input name="opt_noshi_name" type="text" placeholder="(例)　山田　太郎">
+                            <input name="opt_noshi_name" type="text" placeholder="(例)　山田　太郎" value="{{ old('opt_noshi_name') }}">
                         </dd>
                     </dl>
 
                     <dl class="orderTable">
                         <dt>（のし）備考</dt>
                         <dd>
-                            <textarea name="opt_noshi_note"></textarea>
+                            <textarea name="opt_noshi_note">{{ old('opt_noshi_note') }}</textarea>
                         </dd>
                     </dl>
 
@@ -162,26 +169,26 @@
                     <dl class="orderTable">
                         <dt>（送付先）お名前</dt>
                         <dd>
-                            <input name="opt_delivery_name" type="text">
+                            <input name="opt_delivery_name" type="text" value="{{ old('opt_delivery_name') }}">
                         </dd>
                     </dl>
                     <dl class="orderTable">
                         <dt>（送付先）フリガナ</dt>
                         <dd>
-                            <input name="opt_delivery_kana" type="text">
+                            <input name="opt_delivery_kana" type="text" value="{{ old('opt_delivery_kana') }}">
                         </dd>
                     </dl>
                     <dl class="orderTable">
                         <dt>（送付先）お電話番号</dt>
                         <dd>
-                            <input name="opt_delivery_phone" type="text">
+                            <input name="opt_delivery_phone" type="text" value="{{ old('opt_delivery_phone') }}">
                         </dd>
                     </dl>
                     <dl class="orderTable">
                         <dt>（送付先）ご住所</dt>
                         <dd>
                             <div class="address">
-                                <label>（送付先）郵便番号：<input type="text" name="opt_delivery_zip" placeholder=""></label>
+                                <label>（送付先）郵便番号：<input type="text" name="opt_delivery_zip" value="{{ old('opt_delivery_zip') }}"></label>
                                 <label>（送付先）都道府県：
                                     <select name="opt_delivery_pref">
                                         <option value="" selected="selected">選択してください</option>
@@ -234,8 +241,8 @@
                                         <option value="沖縄県">沖縄県</option>
                                     </select>
                                 </label>
-                                <label>（送付先）丁目番地：<input type="text" name="opt_delivery_addr" placeholder=""></label>
-                                <label>（送付先）建物名等：<input type="text" name="opt_delivery_addr2" placeholder=""></label>
+                                <label>（送付先）丁目番地：<input type="text" name="opt_delivery_addr" value="{{ old('opt_delivery_addr') }}"></label>
+                                <label>（送付先）建物名等：<input type="text" name="opt_delivery_addr2" value="{{ old('opt_delivery_addr2') }}"></label>
                             </div>
                         </dd>
                     </dl>
