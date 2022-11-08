@@ -9,8 +9,6 @@
 
         @csrf
 
-        <input type="hidden" name="product_id" value="{{ $product->id }}">
-
         <div class="card">
             <h2>ご注文</h2>
 
@@ -19,6 +17,7 @@
                 <dd>
                     {{ $product->name }}
                     <input type="hidden" name="product_name" value="{{ $product->name }}">
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
                 </dd>
             </dl>
 
@@ -29,9 +28,7 @@
                         @foreach($items as $item)
                         <li>
                             <span>{{ $item->name }}（{{ $item->price }}円）・・・</span>
-                            <input name="{{ $item->name }}" type="text" value="" class="orderNet"
-                                data-charcheck="digit"
-                                data-format="$1 箱"
+                            <input name="item_id_{{ $item->id }}" type="text" value="" class="orderNet"
                                 data-price="{{ $item->price }}">{{ $item->unit }}
                         </li>
                         @endforeach

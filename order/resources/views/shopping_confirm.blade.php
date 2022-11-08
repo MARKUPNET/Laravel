@@ -17,6 +17,7 @@
                 <dd>
                     {{ $inputs['product_name'] }}
                     <input type="hidden" name="product_name" value="{{ $inputs['product_name'] }}">
+                    <input type="hidden" name="product_id" value="{{ $inputs['product_id'] }}">
                 </dd>
             </dl>
 
@@ -24,10 +25,12 @@
                 <dt>サイズ・数量</dt>
                 <dd>
                     <ul class="productList">
+                        @foreach( $itemArray as $item )
                         <li>
-                            <span>5本入り（700円）・・・</span> 0 箱
-                            <input name="長沼かりんとう饅頭（5本入り）" type="hidden" value="0">
+                            <span>{{ $item['name'] }}（{{ $item['price'] }}円）・・・</span> {{ $item['quantity'] }} 箱
+                            <input name="item_id_{{ $item['id'] }}" type="hidden" value="{{ $item['quantity'] }}">
                         </li>
+                        @endforeach
                     </ul>
                 </dd>
             </dl>
@@ -36,8 +39,8 @@
                 <dt>商品合計金額</dt>
                 <dd>
                     <div class="priceSumBox">
-                        <span id="priceSum">0,000 円（税込）</span>
-                        <input type="hidden" name="合計" value="0">
+                        <span id="priceSum">{{ $inputs['price_sum'] }} 円（税込）</span>
+                        <input type="hidden" name="price_sum" value="{{ $inputs['price_sum'] }}">
                     </div>
                 </dd>
             </dl>
@@ -52,11 +55,13 @@
                     <dt>【　の　し　】</dt>
                     <dd>
                         <div class="optSelcBtn">
-                            {{ $inputs['opt_noshi_status'] }}
+                            {{ $inputs['opt_noshi_status_name'] }}
                             <input type="hidden" name="opt_noshi_status" value="{{ $inputs['opt_noshi_status'] }}">
                         </div>
                     </dd>
                 </dl>
+
+                @if( $inputs['opt_noshi_status'] == 1 )
 
                 <div id="noshi" class="optionDetail open">
 
@@ -102,15 +107,19 @@
 
                 </div>
 
+                @endif
+
                 <dl class="orderTable">
                     <dt>【　送付先　】</dt>
                     <dd>
                         <div class="optSelcBtn">
-                            {{ $inputs['opt_delivery_status'] }}
+                            {{ $inputs['opt_delivery_status_name'] }}
                             <input type="hidden" name="opt_delivery_status" value="{{ $inputs['opt_delivery_status'] }}">
                         </div>
                     </dd>
                 </dl>
+
+                @if( $inputs['opt_delivery_status'] == 1 )
 
                 <div id="delivery" class="optionDetail open">
                     <dl class="orderTable">
@@ -124,7 +133,7 @@
                         <dt>（送付先）フリガナ</dt>
                         <dd>
                             {{ $inputs['opt_delivery_kana'] }}
-                            <input type="hidden" name="opt_delivery_name" value="{{ $inputs['opt_delivery_kana'] }}">
+                            <input type="hidden" name="opt_delivery_kana" value="{{ $inputs['opt_delivery_kana'] }}">
                         </dd>
                     </dl>
                     <dl class="orderTable">
@@ -152,6 +161,9 @@
                     </dl>
 
                 </div>
+
+                @endif
+
             </div>
         </div>
 
@@ -223,7 +235,7 @@
             </dl>
 
             <div class="submitButtons">
-                <button type="submit" name="action" value="back" class="btn_submit">入力内容修正</button>
+                <button type="button" onclick="history.back()" class="btn_submit">入力内容修正</button>
                 <button type="submit" name="action" value="submit" class="btn_submit">送信</button>
             </div>
 

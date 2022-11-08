@@ -47,7 +47,34 @@ class ShoppingController extends Controller
 
         $inputs = $request->all();
 
-        return view('shopping_confirm', compact('inputs'));
+        $items = Item::where('products_id', $inputs['product_id'])->get();
+
+        foreach( $items as $item ){
+            if( $inputs['item_id_'.$item->id] ){
+                $itemArray[] = [
+                    'id' => $item->id,
+                    'name' => $item->name,
+                    'price' => $item->price,
+                    'quantity' => $inputs['item_id_'.$item->id],
+                ];
+            }
+        }
+
+        // のし
+        if( $inputs['opt_noshi_status'] == 1 ){
+            $inputs['opt_noshi_status_name'] = 'あり';
+        }else{
+            $inputs['opt_noshi_status_name'] = 'なし';
+        }
+
+        // 送付先
+        if( $inputs['opt_delivery_status'] == 1 ){
+            $inputs['opt_delivery_status_name'] = '別住所';
+        }else{
+            $inputs['opt_delivery_status_name'] = 'お客様情報と同じ';
+        }
+
+        return view('shopping_confirm', compact('inputs','itemArray'));
     }
 
     /**
@@ -57,32 +84,20 @@ class ShoppingController extends Controller
      */
     public function send(Request $request)
     {
-        //フォームから受け取ったactionの値を取得
-        $action = $request->input('action');
 
-        //フォームから受け取ったactionを除いたinputの値を取得
         $inputs = $request->except('action');
 
-        //actionの値で分岐
-        if($action !== 'submit'){
-            return redirect()
-                ->back()
-                ->withInput($inputs);
+        //入力されたデータをデータベースに保存
+        // $this->dataSave($inputs);
 
-        } else {
+        //入力されたメールアドレスにメールを送信
+        Mail::send(new OrderSendmail($inputs));
 
-            //入力されたデータをデータベースに保存
-            // $this->dataSave($inputs);
+        //再送信を防ぐためにトークンを再発行
+        $request->session()->regenerateToken();
 
-            //入力されたメールアドレスにメールを送信
-            Mail::send(new OrderSendmail($inputs));
+        return view('shopping_thanks');
 
-            //再送信を防ぐためにトークンを再発行
-            $request->session()->regenerateToken();
-
-            return view('shopping_thanks');
-
-        }
     }
 
     /**
