@@ -5,7 +5,7 @@
 <br>
 ■サイズ・数量<br>
 @foreach( $item_name as $item )
-{!! $item['name'] !!}・・・{!! $item['quantity'] !!}<br>
+{!! $item['name'] !!}・・・{!! $item['quantity'] !!}{!! $item['unit'] !!}<br>
 @endforeach
 <br>
 【　商品合計金額　】<br>

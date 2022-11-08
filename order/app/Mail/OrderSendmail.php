@@ -27,10 +27,11 @@ class OrderSendmail extends Mailable
 
         $items = Item::where('products_id', $inputs['product_id'])->get();
         foreach( $items as $item ){
-            if( $inputs['item_id_'.$item->id] ){
+            if( array_key_exists( 'item_id_'.$item->id, $inputs ) ){
                 $this->item_name[] = [
                     'name' => $item->name,
                     'quantity' => $inputs['item_id_'.$item->id],
+                    'unit' => $item->unit,
                 ];
             }
         }

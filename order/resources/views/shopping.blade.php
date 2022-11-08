@@ -254,9 +254,9 @@
             <dl class="orderTable">
                 <dt>お名前<span class="hissu">必須</span></dt>
                 <dd>
-                    <input type="text" name="customer_name" placeholder="例)山田　太郎">
+                    <input type="text" name="customer_name" placeholder="例)山田　太郎" value="{{ old('customer_name') }}">
                     @error('customer_name')
-                    <p style="color: #f00;">必須項目です</p>
+                    <p class="errorMsg">必須項目です</p>
                     @enderror
                 </dd>
             </dl>
@@ -264,16 +264,16 @@
             <dl class="orderTable">
                 <dt>フリガナ</dt>
                 <dd>
-                    <input type="text" name="customer_kana" placeholder="例)ヤマダ　タロウ">
+                    <input type="text" name="customer_kana" placeholder="例)ヤマダ　タロウ" value="{{ old('customer_kana') }}">
                 </dd>
             </dl>
 
             <dl class="orderTable">
                 <dt>お電話番号<span class="hissu">必須</span></dt>
                 <dd>
-                    <input type="text" name="customer_phone" placeholder="例)0123-88-0051">
+                    <input type="text" name="customer_phone" placeholder="例)0123-88-0051" value="{{ old('customer_phone') }}">
                     @error('customer_phone')
-                    <p style="color: #f00;">必須項目です</p>
+                    <p class="errorMsg">必須項目です</p>
                     @enderror
                 </dd>
             </dl>
@@ -282,7 +282,7 @@
                 <dt>ご住所<span class="hissu">必須</span></dt>
                 <dd>
                     <div class="address">
-                        <label>郵便番号：<input type="text" name="customer_zip" placeholder=""></label>
+                        <label>郵便番号：<input type="text" name="customer_zip" value="{{ old('customer_zip') }}"></label>
                         <label>都道府県：
                             <select name="customer_pref">
                                 <option value="" selected="selected">選択してください</option>
@@ -335,10 +335,16 @@
                                 <option value="沖縄県">沖縄県</option>
                             </select>
                         </label>
-                        <label>丁目番地：<input type="text" name="customer_addr" placeholder=""></label>
-                        <label>建物名等：<input type="text" name="customer_addr2" placeholder=""></label>
+                        <label>丁目番地：<input type="text" name="customer_addr" value="{{ old('customer_addr') }}"></label>
+                        <label>建物名等：<input type="text" name="customer_addr2" value="{{ old('customer_addr2') }}"></label>
                         @error('customer_zip')
-                        <p style="color: #f00;">必須項目です</p>
+                        <p class="errorMsg">郵便番号は必須項目です</p>
+                        @enderror
+                        @error('customer_pref')
+                        <p class="errorMsg">都道府県は必須項目です</p>
+                        @enderror
+                        @error('customer_addr')
+                        <p class="errorMsg">丁目番地は必須項目です</p>
                         @enderror
                     </div>
                 </dd>
@@ -347,9 +353,9 @@
             <dl class="orderTable">
                 <dt>E-mail<span class="hissu">必須</span></dt>
                 <dd>
-                    <input type="text" name="customer_email" placeholder="">
+                    <input type="text" name="customer_email" value="{{ old('customer_email') }}">
                     @error('customer_email')
-                    <p style="color: #f00;">必須項目です</p>
+                    <p class="errorMsg">必須項目です</p>
                     @enderror
                 </dd>
             </dl>
@@ -357,7 +363,7 @@
             <dl class="orderTable">
                 <dt>備考欄(その他ご質問など)</dt>
                 <dd>
-                    <textarea name="customer_note" rows="10"></textarea>
+                    <textarea name="customer_note" rows="10">{{ old('customer_note') }}</textarea>
                 </dd>
             </dl>
 
@@ -368,7 +374,7 @@
                         <p>個人情報の取り扱いにつきましては、<a href="https://msyofuan.com/privacy">こちら</a>をご覧ください。</p>
                         <label><input type="checkbox" name="customer_privacy" value="同意します">個人情報の取り扱いについて同意をします。</label>
                         @error('customer_privacy')
-                        <p style="color: #f00;">必須項目です</p>
+                        <p class="errorMsg">必須項目です</p>
                         @enderror
                     </div>
                 </dd>

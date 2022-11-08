@@ -42,8 +42,16 @@ class ShoppingController extends Controller
      */
     public function confirm(Request $request)
     {
-        $request->validate([
+        $validated_data = $request->validate([
+            'customer_name'     => 'required',
+            'customer_phone'    => 'required',
+            'customer_zip'      => 'required',
+            'customer_pref'     => 'required',
+            'customer_addr'     => 'required',
+            'customer_email'    => 'required|email',
+            'customer_privacy'     => 'required',
         ]);
+
 
         $inputs = $request->all();
 
