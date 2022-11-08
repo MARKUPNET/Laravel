@@ -127,3 +127,8 @@ wrapper
         max-width: 920px;
     }
 }
+@media screen and (min-width: 768px) {
+    .page-content{
+        padding: 50px 100px 100px;
+    }
+}

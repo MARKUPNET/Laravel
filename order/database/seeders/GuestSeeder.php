@@ -23,7 +23,7 @@ class GuestSeeder extends Seeder
                 'phone'     => '09000000000',
                 'zip'       => '0690382',
                 'pref'      => '北海道',
-                'addr1'     => '岩見沢市幌向北2条1丁目',
+                'addr'      => '岩見沢市幌向北2条1丁目',
                 'addr2'     => '611-144',
                 'email'     => 'first.things.first0417@markupnet.jp',
             ],

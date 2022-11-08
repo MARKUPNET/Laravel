@@ -23,7 +23,7 @@ class Guest extends Model
         'phone',
         'zip',
         'pref',
-        'addr1',
+        'addr',
         'addr2',
         'email',
     ];

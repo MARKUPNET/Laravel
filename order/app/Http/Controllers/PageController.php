@@ -19,4 +19,14 @@ class PageController extends Controller
         return view('index', compact('products'));
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function privacy()
+    {
+        return view('privacy');
+    }
+
 }

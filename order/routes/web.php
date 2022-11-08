@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 // 静的ページ
 Route::get('/', [App\Http\Controllers\PageController::class, 'index'])->name('index');
+Route::get('/privacy', [App\Http\Controllers\PageController::class, 'privacy'])->name('privacy');
 
 // ご注文
 Route::get('/shopping/{product_id?}/', [App\Http\Controllers\ShoppingController::class, 'index'])->name('shopping.index');

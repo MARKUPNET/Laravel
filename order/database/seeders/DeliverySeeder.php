@@ -24,7 +24,7 @@ class DeliverySeeder extends Seeder
                 'phone'     => '09000000000',
                 'zip'       => '0690382',
                 'pref'      => '北海道',
-                'addr1'     => '札幌市',
+                'addr'      => '札幌市',
                 'addr2'     => '611-144',
             ],
 

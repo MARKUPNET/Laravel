@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
+
+use App\Models\Delivery;
+use App\Models\Guest;
 use App\Models\Item;
+use App\Models\Noshi;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\Quantity;
 
 use Mail;
 use App\Mail\OrderSendmail;
@@ -55,7 +61,6 @@ class ShoppingController extends Controller
         $inputs = $request->all();
 
         $items = Item::where('products_id', $inputs['product_id'])->get();
-
         foreach( $items as $item ){
             if( $inputs['item_id_'.$item->id] ){
                 $itemArray[] = [
@@ -94,8 +99,10 @@ class ShoppingController extends Controller
 
         $inputs = $request->except('action');
 
+        $inputs['serialnumber'] = '123456';
+
         //入力されたデータをデータベースに保存
-        // $this->dataSave($inputs);
+        $this->dataSave($inputs);
 
         //入力されたメールアドレスにメールを送信
         Mail::send(new OrderSendmail($inputs));
@@ -114,7 +121,81 @@ class ShoppingController extends Controller
      */
     public function dataSave($inputs)
     {
+
+        // 注文
+        $order = new Order;
+        $order->serialnumber    = $inputs['serialnumber'];
+        $order->products_id     = $inputs['product_id'];
+        $order->save();
+
+        //サイズ・数量
+        $items = Item::where('products_id', $inputs['product_id'])->get();
+        foreach( $items as $item ){
+            if( array_key_exists( 'item_id_'.$item->id, $inputs ) ){
+                $quantity = new Quantity;
+                $quantity->orders_id    = $order->id;
+                $quantity->items_id     = $item['id'];
+                $quantity->quantity     = $inputs['item_id_'.$item->id];
+                $quantity->save();
+            }
+        }
+
+
+        // のし
+        $noshi = new Noshi;
+        $noshi->orders_id   = $order->id;
+        $noshi->status      = $inputs['opt_noshi_status'];
+        if( $inputs['opt_noshi_status'] == 1 ){
+            $noshi->type        = $inputs['opt_noshi_type'];
+            $noshi->color       = $inputs['opt_noshi_color'];
+            $noshi->position    = $inputs['opt_noshi_position'];
+            $noshi->name        = $inputs['opt_noshi_name'];
+            $noshi->note        = $inputs['opt_noshi_note'];
+        }else{
+            $noshi->type        = null;
+            $noshi->color       = null;
+            $noshi->position    = null;
+            $noshi->name        = null;
+            $noshi->note        = null;
+        }
+        $noshi->save();
+
+        // 送付先
+        $delivery = new Delivery;
+        $delivery->orders_id    = $order->id;
+        $delivery->status       = $inputs['opt_delivery_status'];
+        if( $inputs['opt_delivery_status'] == 1 ){
+            $delivery->name         = $inputs['opt_delivery_name'];
+            $delivery->kana         = $inputs['opt_delivery_kana'];
+            $delivery->phone        = $inputs['opt_delivery_phone'];
+            $delivery->zip          = $inputs['opt_delivery_zip'];
+            $delivery->pref         = $inputs['opt_delivery_pref'];
+            $delivery->addr         = $inputs['opt_delivery_addr'];
+            $delivery->addr2        = $inputs['opt_delivery_addr2'];
+        }else{
+            $delivery->name         = null;
+            $delivery->kana         = null;
+            $delivery->phone        = null;
+            $delivery->zip          = null;
+            $delivery->pref         = null;
+            $delivery->addr         = null;
+            $delivery->addr2        = null;
+        }
+        $delivery->save();
+
+        // お客様情報
         $guest = new Guest;
+        $guest->orders_id   = $order->id;
+        $guest->name        = $inputs['customer_name'];
+        $guest->kana        = $inputs['customer_kana'];
+        $guest->phone       = $inputs['customer_phone'];
+        $guest->zip         = $inputs['customer_zip'];
+        $guest->pref        = $inputs['customer_pref'];
+        $guest->addr        = $inputs['customer_addr'];
+        $guest->addr2       = $inputs['customer_addr2'];
+        $guest->email       = $inputs['customer_email'];
         $guest->save();
+
+
     }
 }

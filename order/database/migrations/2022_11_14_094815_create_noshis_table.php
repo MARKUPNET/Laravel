@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('orders_id')->comment('注文ID');
             $table->foreign('orders_id')->references('id')->on('orders');
 
-            $table->string('status');
+            $table->integer('status');
             $table->string('type')->comment('のし種類')->nullable();
             $table->string('color')->comment('のし色')->nullable();
             $table->string('position')->comment('のし位置')->nullable();

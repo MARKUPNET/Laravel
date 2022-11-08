@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('phone')->comment('電話番号')->nullable();
             $table->string('zip')->comment('郵便番号')->nullable();
             $table->string('pref')->comment('都道府県')->nullable();
-            $table->string('addr1')->comment('丁目番地')->nullable();
+            $table->string('addr')->comment('丁目番地')->nullable();
             $table->string('addr2')->comment('建物名等')->nullable();
             $table->string('email')->comment('Eメール')->nullable();
 

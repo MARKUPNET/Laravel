@@ -378,7 +378,7 @@
                 <dt>個人情報の取り扱いについて<span class="hissu">必須</span></dt>
                 <dd>
                     <div>
-                        <p>個人情報の取り扱いにつきましては、<a href="https://msyofuan.com/privacy">こちら</a>をご覧ください。</p>
+                        <p>個人情報の取り扱いにつきましては、<a href="{{ route('privacy') }}">こちら</a>をご覧ください。</p>
                         <label><input type="checkbox" name="customer_privacy" value="同意します">個人情報の取り扱いについて同意をします。</label>
                         @error('customer_privacy')
                         <p class="errorMsg">必須項目です</p>
