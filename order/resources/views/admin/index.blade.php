@@ -28,7 +28,7 @@
                             <tr>
                                 <th scope="row">000</th>
                                 <td><a href="{{ route('order.show', $order->id) }}?page_id={{ $page_id }}">0000000</a></td>
-                                <td>{{ $order->product->name }}</td>
+                                <td>{{ $order->products_id }}</td>
                                 <td>{{ $order->pricesum }}</td>
                                 <td>山田太郎</td>
                                 <td>xxxx@xxx.xx</td>
