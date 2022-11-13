@@ -21,7 +21,11 @@ class QuantitySeeder extends Seeder
                 'items_id' => '1',
                 'quantity' => '1',
             ],
-
+            [
+                'orders_id' => '2',
+                'items_id' => '1',
+                'quantity' => '1',
+            ],
         ]);
     }
 }

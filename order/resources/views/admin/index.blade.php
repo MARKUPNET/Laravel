@@ -26,12 +26,12 @@
 
                             @foreach($orders as $order)
                             <tr>
-                                <th scope="row">000</th>
-                                <td><a href="{{ route('order.show', $order->id) }}?page_id={{ $page_id }}">0000000</a></td>
+                                <th scope="row">{{ $order->id }}</th>
+                                <td><a href="{{ route('order.show', $order->id) }}?page_id={{ $order->id }}">{{ $order->serialnumber }}</a></td>
                                 <td>{{ $order->products->name }}</td>
-                                <td>{{ $order->pricesum }}</td>
-                                <td>山田太郎</td>
-                                <td>xxxx@xxx.xx</td>
+                                <td>{{ number_format($order->pricesum) }}</td>
+                                <td>{{ $order->id }}</td>
+                                <td>{{ $order->id }}</td>
                             </tr>
                             @endforeach
 

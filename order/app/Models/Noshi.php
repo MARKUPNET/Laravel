@@ -28,6 +28,6 @@ class Noshi extends Model
 
     public function orders()
     {
-        return $this->belongsTo(Oder::class);
+        return $this->belongsTo(Order::class);
     }
 }

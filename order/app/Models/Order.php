@@ -37,12 +37,12 @@ class Order extends Model
         return $this->hasMany(Noshi::class);
     }
 
-    public function deliverys()
+    public function deliveries()
     {
         return $this->hasMany(Delivery::class);
     }
 
-    public function quantity()
+    public function quantities()
     {
         return $this->hasMany(Quantity::class);
     }

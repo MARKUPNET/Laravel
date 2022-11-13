@@ -31,15 +31,13 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $deliverys   = Delivery::get();
-        $guests      = Guest::get();
-        $items       = Item::get();
-        $noshis      = Noshi::get();
-        $orders      = Order::get();
-        $products    = Product::get();
-        $quantitys   = Quantity::get();
+        $orders      = Order::with(['products' => function ($query){
 
-        return view('admin/index', compact('deliverys', 'guests', 'items', 'noshis', 'orders', 'products', 'quantitys'))
+        }])->get();
+
+        // dd($orders);
+
+        return view('admin/index', compact( 'orders'))
             ->with('page_id', request()->page_id);
     }
 }

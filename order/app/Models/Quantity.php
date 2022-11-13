@@ -24,11 +24,11 @@ class Quantity extends Model
 
     public function orders()
     {
-        return $this->hasMany(Order::class);
+        return $this->belongsTo(Order::class);
     }
 
     public function items()
     {
-        return $this->hasMany(Item::class);
+        return $this->belongsTo(Item::class);
     }
 }
