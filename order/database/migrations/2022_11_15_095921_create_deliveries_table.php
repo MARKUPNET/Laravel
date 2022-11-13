@@ -15,8 +15,6 @@ return new class extends Migration
     {
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('orders_id')->comment('注文ID');
-            $table->foreign('orders_id')->references('id')->on('orders');
 
             $table->integer('status');
             $table->string('name')->comment('名前')->nullable();

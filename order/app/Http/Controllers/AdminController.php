@@ -4,13 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Delivery;
-use App\Models\Guest;
-use App\Models\Item;
-use App\Models\Noshi;
 use App\Models\Order;
-use App\Models\Product;
-use App\Models\Quantity;
 
 class AdminController extends Controller
 {
@@ -31,13 +25,11 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $orders      = Order::with(['products' => function ($query){
-
-        }])->get();
+        $orders      = Order::with(['products', 'noshis', 'deliveries', 'guests'])->get();
 
         // dd($orders);
 
-        return view('admin/index', compact( 'orders'))
+        return view('admin/index', compact( 'orders' ))
             ->with('page_id', request()->page_id);
     }
 }

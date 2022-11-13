@@ -21,6 +21,15 @@ return new class extends Migration
             $table->unsignedBigInteger('products_id')->comment('商品ID');
             $table->foreign('products_id')->references('id')->on('products');
 
+            $table->unsignedBigInteger('noshis_id')->comment('のしID');
+            $table->foreign('noshis_id')->references('id')->on('noshis');
+
+            $table->unsignedBigInteger('deliveries_id')->comment('送付先ID');
+            $table->foreign('deliveries_id')->references('id')->on('deliveries');
+
+            $table->unsignedBigInteger('guests_id')->comment('顧客ID');
+            $table->foreign('guests_id')->references('id')->on('guests');
+
             $table->integer('pricesum')->comment('合計金額');
 
             $table->timestamps();

@@ -30,8 +30,8 @@
                                 <td><a href="{{ route('order.show', $order->id) }}?page_id={{ $order->id }}">{{ $order->serialnumber }}</a></td>
                                 <td>{{ $order->products->name }}</td>
                                 <td>{{ number_format($order->pricesum) }}</td>
-                                <td>{{ $order->id }}</td>
-                                <td>{{ $order->id }}</td>
+                                <td>{{ $order->guests->name }}</td>
+                                <td>{{ $order->guests->email }}</td>
                             </tr>
                             @endforeach
 

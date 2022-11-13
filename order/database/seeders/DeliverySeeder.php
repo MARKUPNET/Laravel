@@ -17,7 +17,6 @@ class DeliverySeeder extends Seeder
     {
         DB::table('deliveries')->insert([
             [
-                'orders_id' => '1',
                 'status'    => '1',
                 'name'      => '山田次郎',
                 'kana'      => 'ヤマダジロウ',

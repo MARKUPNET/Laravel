@@ -19,6 +19,9 @@ class Order extends Model
     protected $fillable = [
         'serialnumber',
         'products_id',
+        'noshis_id',
+        'deliveries_id',
+        'guests_id',
         'pricesum',
     ];
 
@@ -29,17 +32,17 @@ class Order extends Model
 
     public function guests()
     {
-        return $this->hasMany(Guest::class);
+        return $this->belongsTo(Guest::class);
     }
 
     public function noshis()
     {
-        return $this->hasMany(Noshi::class);
+        return $this->belongsTo(Noshi::class);
     }
 
     public function deliveries()
     {
-        return $this->hasMany(Delivery::class);
+        return $this->belongsTo(Delivery::class);
     }
 
     public function quantities()

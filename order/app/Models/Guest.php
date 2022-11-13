@@ -17,7 +17,6 @@ class Guest extends Model
 
     // 登録・更新可能なカラムの指定
     protected $fillable = [
-        'orders_id',
         'name',
         'kana',
         'phone',
@@ -30,6 +29,6 @@ class Guest extends Model
 
     public function orders()
     {
-        return $this->belongsTo(Order::class);
+        return $this->hasMany(Order::class);
     }
 }

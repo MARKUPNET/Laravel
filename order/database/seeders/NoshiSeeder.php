@@ -17,7 +17,6 @@ class NoshiSeeder extends Seeder
     {
         DB::table('noshis')->insert([
             [
-                'orders_id' => '1',
                 'status'    => '1',
                 'type'      => 'お歳暮',
                 'color'     => '紅白',

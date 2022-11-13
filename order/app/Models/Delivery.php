@@ -17,7 +17,6 @@ class Delivery extends Model
 
     // 登録・更新可能なカラムの指定
     protected $fillable = [
-        'orders_id',
         'status',
         'name',
         'kana',

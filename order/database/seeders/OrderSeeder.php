@@ -19,11 +19,17 @@ class OrderSeeder extends Seeder
             [
                 'serialnumber' => '20221101001',
                 'products_id' => '1',
+                'noshis_id' => '1',
+                'deliveries_id' => '1',
+                'guests_id' => '1',
                 'pricesum' => '1000',
             ],
             [
                 'serialnumber' => '20221101002',
                 'products_id' => '2',
+                'noshis_id' => '1',
+                'deliveries_id' => '1',
+                'guests_id' => '2',
                 'pricesum' => '2000',
             ],
         ]);
