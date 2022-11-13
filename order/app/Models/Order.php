@@ -19,6 +19,7 @@ class Order extends Model
     protected $fillable = [
         'serialnumber',
         'products_id',
+        'pricesum',
     ];
 
     public function product()
@@ -26,17 +27,17 @@ class Order extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function guest()
+    public function guests()
     {
         return $this->hasMany(Guest::class);
     }
 
-    public function noshi()
+    public function noshis()
     {
         return $this->hasMany(Noshi::class);
     }
 
-    public function delivery()
+    public function deliverys()
     {
         return $this->hasMany(Delivery::class);
     }

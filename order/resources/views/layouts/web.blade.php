@@ -33,10 +33,14 @@
                     </div>
                     <div class="header__navi">
                         <nav class="gNavi">
-                            <ul>
-                                <li><a href="{{ route('shopping.index') }}/1">かりんとう饅頭</a></li>
-                                <li><a href="{{ route('shopping.index') }}/2">ながぬま ふ輪っと</a></li>
-                                <li><a href="{{ route('shopping.index') }}/3">あかねいろマドレーヌ</a></li>
+                            <ul class="main">
+                                <li class="hasChild"><a href="{{ route('index') }}">商品一覧</a>
+                                    <ul class="sub">
+                                        <li><a href="{{ route('shopping.index') }}/1">かりんとう饅頭</a></li>
+                                        <li><a href="{{ route('shopping.index') }}/2">ながぬま ふ輪っと</a></li>
+                                        <li><a href="{{ route('shopping.index') }}/3">あかねいろマドレーヌ</a></li>
+                                    </ul>
+                                </li>
                                 <li><a href="{{ route('admin.index') }}">管理画面</a></li>
                             </ul>
                         </nav>

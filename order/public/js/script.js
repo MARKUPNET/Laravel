@@ -32,4 +32,10 @@ $(function () {
             return false;
         }
     });
+
+
+    $('.hasChild').click(function () {
+        $(this).toggleClass('open');
+    });
+
 });

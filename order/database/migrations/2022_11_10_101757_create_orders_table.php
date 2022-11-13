@@ -21,6 +21,8 @@ return new class extends Migration
             $table->unsignedBigInteger('products_id')->comment('商品ID');
             $table->foreign('products_id')->references('id')->on('products');
 
+            $table->integer('pricesum')->comment('合計金額');
+
             $table->timestamps();
         });
     }

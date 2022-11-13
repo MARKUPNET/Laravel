@@ -36,7 +36,7 @@ class OrderSendmail extends Mailable
             }
         }
 
-        $this->price_sum    = $inputs['price_sum'];
+        $this->pricesum    = $inputs['pricesum'];
 
         // のし
         $this->opt_noshi_status     = $inputs['opt_noshi_status'];
@@ -101,7 +101,7 @@ class OrderSendmail extends Mailable
             ->with([
                 'product_name'  => $this->product_name,
                 'item_name'     => $this->item_name,
-                'price_sum'     => $this->price_sum,
+                'pricesum'     => $this->pricesum,
 
                 'opt_noshi_status_name'  => $this->opt_noshi_status_name,
                 'opt_noshi_status'  => $this->opt_noshi_status,

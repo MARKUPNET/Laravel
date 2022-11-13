@@ -7,7 +7,40 @@
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <div id="app">
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">注文番号</th>
+                                <th scope="col">商品名</th>
+                                <th scope="col">金額</th>
+                                <th scope="col">お客様</th>
+                                <th scope="col">Email</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-striped">
+
+                            @foreach($orders as $order)
+                            <tr>
+                                <th scope="row">000</th>
+                                <td><a href="{{ route('order.show', $order->id) }}?page_id={{ $page_id }}">0000000</a></td>
+                                <td>{{ $order->product->name }}</td>
+                                <td>{{ $order->pricesum }}</td>
+                                <td>山田太郎</td>
+                                <td>xxxx@xxx.xx</td>
+                            </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 
 @section('css')
@@ -15,5 +48,4 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
 @stop

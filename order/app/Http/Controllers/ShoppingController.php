@@ -126,6 +126,7 @@ class ShoppingController extends Controller
         $order = new Order;
         $order->serialnumber    = $inputs['serialnumber'];
         $order->products_id     = $inputs['product_id'];
+        $order->pricesum        = str_replace(',', '',$inputs['pricesum']);
         $order->save();
 
         //サイズ・数量

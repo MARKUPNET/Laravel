@@ -22,12 +22,12 @@ class Quantity extends Model
         'quantity',
     ];
 
-    public function order()
+    public function orders()
     {
         return $this->hasMany(Order::class);
     }
 
-    public function item()
+    public function items()
     {
         return $this->hasMany(Item::class);
     }

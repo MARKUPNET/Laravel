@@ -19,6 +19,7 @@ class OrderSeeder extends Seeder
             [
                 'serialnumber' => '20221101001',
                 'products_id' => '1',
+                'pricesum' => '2000',
             ],
 
         ]);

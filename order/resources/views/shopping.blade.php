@@ -48,7 +48,7 @@
                 <dd>
                     <div class="priceSumBox">
                         <span id="priceSum">
-                            <input type="text" name="price_sum" value="0" class="total_sum">円（税込）
+                            <input type="text" name="pricesum" value="0" class="total_sum">円（税込）
                             <span class="caution">※別途送料がかかります。送料を含めた合計金額は後ほど、ご連絡差し上げます。</span>
                         </span>
                     </div>
@@ -188,7 +188,7 @@
                         <dt>（送付先）ご住所</dt>
                         <dd>
                             <div class="address">
-                                <label>（送付先）郵便番号：<input type="text" name="opt_delivery_zip" value="{{ old('opt_delivery_zip') }}"></label>
+                                <label>（送付先）郵便番号：<input type="text" name="opt_delivery_zip" value="{{ old('opt_delivery_zip') }}" id="opt_delivery_zip"></label>
                                 <label>（送付先）都道府県：
                                     <select name="opt_delivery_pref">
                                         <option value="" selected="selected">選択してください</option>
@@ -289,7 +289,7 @@
                 <dt>ご住所<span class="hissu">必須</span></dt>
                 <dd>
                     <div class="address">
-                        <label>郵便番号：<input type="text" name="customer_zip" value="{{ old('customer_zip') }}"></label>
+                        <label>郵便番号：<input type="text" name="customer_zip" value="{{ old('customer_zip') }}" id="customer_zip"></label>
                         <label>都道府県：
                             <select name="customer_pref">
                                 <option value="" selected="selected">選択してください</option>
@@ -410,7 +410,7 @@
         */
 
         /*サイズ・数量　合計金額*/
-        var priceSum = function () {
+        var total = function () {
             $('.orderNet').on('input', function () {
                 var total_sum = 0;
 
@@ -422,7 +422,7 @@
                     }
                 });
                 total_sum = total_sum.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-                $("input[name='price_sum']").val(total_sum);
+                $("input[name='pricesum']").val(total_sum);
             });
         }
 
@@ -449,10 +449,31 @@
                 }
             });
         }
-        priceSum();
+        total();
         Noshi();	//オプション　のし
         delivery();	//オプション　送付先
 
     });
 </script>
+
+<!--//.ajaxzip3 -->
+    <script type='text/javascript' src='https://ajaxzip3.github.io/ajaxzip3.js'></script>
+    <script type="text/javascript">
+        //<![CDATA[
+        jQuery(function(){
+            jQuery('#opt_delivery_zip').keyup(function(e){
+            AjaxZip3.zip2addr(this,'','opt_delivery_pref','opt_delivery_addr');
+            })
+        })
+        //]]>
+
+        //<![CDATA[
+            jQuery(function(){
+                jQuery('#customer_zip').keyup(function(e){
+                AjaxZip3.zip2addr(this,'','customer_pref','customer_addr');
+                })
+            })
+            //]]>
+    </script>
+<!--//.ajaxzip3 -->
 @endsection

@@ -23,7 +23,7 @@ class Item extends Model
         'price',
     ];
 
-    public function quantity()
+    public function quantities()
     {
         return $this->hasMany(Quantity::class);
     }

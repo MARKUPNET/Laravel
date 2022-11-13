@@ -47,8 +47,8 @@
                 <dt>商品合計金額</dt>
                 <dd>
                     <div class="priceSumBox">
-                        <span id="priceSum">{{ $inputs['price_sum'] }} 円（税込）</span>
-                        <input type="hidden" name="price_sum" value="{{ $inputs['price_sum'] }}">
+                        <span id="priceSum">{{ $inputs['pricesum'] }} 円（税込）</span>
+                        <input type="hidden" name="pricesum" value="{{ $inputs['pricesum'] }}">
                     </div>
                 </dd>
             </dl>

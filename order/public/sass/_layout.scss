@@ -20,6 +20,13 @@
     }
 }
 
+body{
+    font-size: 15px;
+    @media screen and (min-width: 768px) {
+        font-size: 18px;
+    }
+}
+
 /************************
 wrapper
 ************************/
@@ -49,6 +56,14 @@ wrapper
     }
 }
 
+.header__logo{
+
+    a{
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
 @media screen and (max-width: 767px) {
     .header__navi{
         display: none;
@@ -62,15 +77,61 @@ wrapper
         nav.gNavi{
             padding: 50px;
 
-            ul{
+            ul.main{
                 display: flex;
                 flex-wrap: wrap;
+
+                & > li{
+                    margin: 15px 0;
+                    width: 100%;
+                    text-align: center;
+
+                    a{
+                        font-size: 22px;
+                        color: inherit;
+                        text-decoration: none;
+                    }
+
+                    &.hasChild{
+
+                        & > a{
+                            pointer-events: none;
+                        }
+                    }
+
+                    &.open{
+
+                        ul.sub{
+                            display: block;
+                        }
+                    }
+                }
             }
 
-            li{
-                width: 100%;
-                text-align: center;
+            ul.sub{
+                display: none;
+                margin-top: 20px;
+
+                & > li{
+                    margin: 5px 0;
+                    width: 100%;
+                    text-align: center;
+
+                    a{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 100%;
+                        height: 50px;
+                        font-size: 16px;
+                        border: 1px solid #333;
+                        color: inherit;
+                        text-decoration: none;
+                    }
+                }
             }
+
+
         }
     }
 
@@ -83,15 +144,55 @@ wrapper
 
         nav.gNavi{
 
-            ul{
+            ul.main{
                 display: flex;
                 justify-content: flex-end;
                 margin: 0 -10px;
+
+                & > li{
+                    padding: 0 10px;
+                    position: relative;
+
+                    &:hover{
+
+                        ul.sub{
+                            visibility: visible;
+                            height: auto;
+                            pointer-events: all;
+                        }
+                    }
+
+                    a{
+                        padding: 0 20px;
+                        color: inherit;
+                        text-decoration: none;
+                    }
+                }
             }
 
-            li{
-                padding: 0 10px;
+            ul.sub{
+                visibility: hidden;
+                height: 0;
+                pointer-events: none;
+                background-color: #fff;
+
+                width: 170px;
+                position: absolute;
+                right: 0;
+                top: 100%;
+
+                & > li{
+                    padding: 10px 0;
+                    border-bottom: 1px solid #333;
+
+                    a{
+                        padding: 0 10px;
+                        color: inherit;
+                        text-decoration: none;
+                    }
+                }
             }
+
         }
     }
 }

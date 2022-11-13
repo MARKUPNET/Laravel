@@ -25,3 +25,5 @@ Route::post('/shopping/thanks', [App\Http\Controllers\ShoppingController::class,
 // 管理画面
 Auth::routes();
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
+
+Route::get('/admin/order/show{order}', [App\Http\Controllers\OrderController::class, 'show'])->name('order.show');
