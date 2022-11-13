@@ -28,7 +28,7 @@ class Delivery extends Model
         'addr2',
     ];
 
-    public function order()
+    public function orders()
     {
         return $this->belongsTo(Oder::class);
     }

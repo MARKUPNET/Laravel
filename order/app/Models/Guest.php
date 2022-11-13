@@ -28,7 +28,7 @@ class Guest extends Model
         'email',
     ];
 
-    public function order()
+    public function orders()
     {
         return $this->belongsTo(Oder::class);
     }

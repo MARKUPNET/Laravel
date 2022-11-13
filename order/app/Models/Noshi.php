@@ -26,7 +26,7 @@ class Noshi extends Model
         'note',
     ];
 
-    public function order()
+    public function orders()
     {
         return $this->belongsTo(Oder::class);
     }

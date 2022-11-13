@@ -28,7 +28,7 @@ class Item extends Model
         return $this->hasMany(Quantity::class);
     }
 
-    public function product()
+    public function products()
     {
         return $this->belongsTo(Product::class);
     }
