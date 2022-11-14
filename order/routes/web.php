@@ -26,4 +26,17 @@ Route::post('/shopping/thanks', [App\Http\Controllers\ShoppingController::class,
 Auth::routes();
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
 
+Route::get('/admin/order/', [App\Http\Controllers\OrderController::class, 'index'])->name('order.index');
 Route::get('/admin/order/show{order}', [App\Http\Controllers\OrderController::class, 'show'])->name('order.show');
+
+Route::get('/admin/guest/edit{guest}', [App\Http\Controllers\GuestController::class, 'edit'])->name('guest.edit');
+Route::post('/admin/guest/edit{guest}', [App\Http\Controllers\GuestController::class, 'update'])->name('guest.update');
+
+Route::get('/admin/noshi/edit{noshi}', [App\Http\Controllers\NoshiController::class, 'edit'])->name('noshi.edit');
+Route::post('/admin/noshi/edit{noshi}', [App\Http\Controllers\NoshiController::class, 'update'])->name('noshi.update');
+
+Route::get('/admin/delivery/edit{delivery}', [App\Http\Controllers\DeliveryController::class, 'edit'])->name('delivery.edit');
+Route::post('/admin/delivery/edit{delivery}', [App\Http\Controllers\DeliveryController::class, 'update'])->name('delivery.update');
+
+Route::get('/admin/quantity/edit{quantity}', [App\Http\Controllers\QuantityController::class, 'edit'])->name('quantity.edit');
+Route::post('/admin/quantity/edit{quantity}', [App\Http\Controllers\QuantityController::class, 'update'])->name('quantity.update');

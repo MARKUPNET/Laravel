@@ -4,15 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Delivery;
 use App\Models\Guest;
-use App\Models\Item;
-use App\Models\Noshi;
-use App\Models\Order;
-use App\Models\Product;
-use App\Models\Quantity;
 
-class OrderController extends Controller
+class GuestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,9 +15,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders      = Order::with(['products', 'noshis', 'deliveries', 'guests'])->get();
-        return view('admin/order/index', compact( 'orders' ))
-            ->with('page_id', request()->page_id);
+        //
     }
 
     /**
@@ -53,23 +45,9 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show($id)
     {
-        if( $order->noshis->status == 0 ){
-            $order->noshis->status_name = '無し';
-        }else{
-            $order->noshis->status_name = '有り';
-        }
-
-        if( $order->deliveries->status == 0 ){
-            $order->deliveries->status_name = '無し';
-        }else{
-            $order->deliveries->status_name = '有り';
-        }
-
-        $quantities = Quantity::where('orders_id', $order->id)->get();
-
-        return view('/admin/order/show', compact('order', 'quantities'));
+        //
     }
 
     /**
@@ -78,9 +56,11 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Order $order)
+    public function edit($id)
     {
-        //
+        $guest = Guest::where('id', $id)->first();
+
+        return view('/admin/guest/edit', compact('guest'));
     }
 
     /**
@@ -90,10 +70,22 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request, Guest $guest)
     {
-        //
-        return redirect()->route('admin.index')
+        $request->validate([
+        ]);
+
+        $guest->name    = $request->input(["name"]);
+        $guest->kana    = $request->input(["kana"]);
+        $guest->phone   = $request->input(["phone"]);
+        $guest->zip     = $request->input(["zip"]);
+        $guest->pref    = $request->input(["pref"]);
+        $guest->addr    = $request->input(["addr"]);
+        $guest->addr2   = $request->input(["addr2"]);
+        $guest->email   = $request->input(["email"]);
+        $guest->save();
+
+        return redirect()->route('guest.edit', $guest->id)
             ->with('success', '登録しました。');
     }
 

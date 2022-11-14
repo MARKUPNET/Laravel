@@ -3,13 +3,14 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>ご注文一覧</h1>
 @stop
 
 @section('content')
     <div id="app">
         <div class="row">
             <div class="col-12">
+
                 <div class="table-responsive">
                     <table class="table">
                         <thead class="thead-dark">
@@ -38,13 +39,14 @@
                         </tbody>
                     </table>
                 </div>
+
             </div>
         </div>
     </div>
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="/css/admin.css">
 @stop
 
 @section('js')

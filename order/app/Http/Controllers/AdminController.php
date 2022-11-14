@@ -26,9 +26,6 @@ class AdminController extends Controller
     public function index()
     {
         $orders      = Order::with(['products', 'noshis', 'deliveries', 'guests'])->get();
-
-        // dd($orders);
-
         return view('admin/index', compact( 'orders' ))
             ->with('page_id', request()->page_id);
     }
