@@ -99,7 +99,7 @@ class ShoppingController extends Controller
 
         $inputs = $request->except('action');
 
-        $inputs['serialnumber'] = '123456';
+        $inputs['serialnumber'] = $this->getOrderId();
 
         //入力されたデータをデータベースに保存
         $this->dataSave($inputs);
@@ -122,29 +122,8 @@ class ShoppingController extends Controller
     public function dataSave($inputs)
     {
 
-        // 注文
-        $order = new Order;
-        $order->serialnumber    = $inputs['serialnumber'];
-        $order->products_id     = $inputs['product_id'];
-        $order->pricesum        = str_replace(',', '',$inputs['pricesum']);
-        $order->save();
-
-        //サイズ・数量
-        $items = Item::where('products_id', $inputs['product_id'])->get();
-        foreach( $items as $item ){
-            if( array_key_exists( 'item_id_'.$item->id, $inputs ) ){
-                $quantity = new Quantity;
-                $quantity->orders_id    = $order->id;
-                $quantity->items_id     = $item['id'];
-                $quantity->quantity     = $inputs['item_id_'.$item->id];
-                $quantity->save();
-            }
-        }
-
-
         // のし
         $noshi = new Noshi;
-        $noshi->orders_id   = $order->id;
         $noshi->status      = $inputs['opt_noshi_status'];
         if( $inputs['opt_noshi_status'] == 1 ){
             $noshi->type        = $inputs['opt_noshi_type'];
@@ -163,7 +142,6 @@ class ShoppingController extends Controller
 
         // 送付先
         $delivery = new Delivery;
-        $delivery->orders_id    = $order->id;
         $delivery->status       = $inputs['opt_delivery_status'];
         if( $inputs['opt_delivery_status'] == 1 ){
             $delivery->name         = $inputs['opt_delivery_name'];
@@ -186,7 +164,6 @@ class ShoppingController extends Controller
 
         // お客様情報
         $guest = new Guest;
-        $guest->orders_id   = $order->id;
         $guest->name        = $inputs['customer_name'];
         $guest->kana        = $inputs['customer_kana'];
         $guest->phone       = $inputs['customer_phone'];
@@ -197,6 +174,36 @@ class ShoppingController extends Controller
         $guest->email       = $inputs['customer_email'];
         $guest->save();
 
+        // 注文
+        $order = new Order;
+        $order->serialnumber    = $inputs['serialnumber'];
+        $order->products_id     = $inputs['product_id'];
+        $order->noshis_id       = $noshi->id;
+        $order->deliveries_id   = $delivery->id;
+        $order->guests_id       = $guest->id;
+        $order->pricesum        = str_replace(',', '',$inputs['pricesum']);
+        $order->save();
 
+        //サイズ・数量
+        $items = Item::where('products_id', $inputs['product_id'])->get();
+        foreach( $items as $item ){
+            if( array_key_exists( 'item_id_'.$item->id, $inputs ) ){
+                $quantity = new Quantity;
+                $quantity->orders_id    = $order->id;
+                $quantity->items_id     = $item['id'];
+                $quantity->quantity     = $inputs['item_id_'.$item->id];
+                $quantity->save();
+            }
+        }
     }
+
+
+    public function getOrderId()
+    {
+        $order_last = Order::latest('id')->first();
+        $number = date('Ymd').str_pad(($order_last->id + 1),3,0,STR_PAD_LEFT);
+
+        return $number;
+    }
+
 }
