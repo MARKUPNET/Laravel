@@ -23,10 +23,13 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders      = Order::with(['products', 'noshis', 'deliveries', 'guests'])->get();
-        return view('admin/index', compact( 'orders' ))
+        $orders = Order::with(['products', 'noshis', 'deliveries', 'guests'])
+            ->orderBy('created_at')
+            ->get();
+
+        return view('admin/index', compact( 'orders', 'request' ))
             ->with('page_id', request()->page_id);
     }
 }

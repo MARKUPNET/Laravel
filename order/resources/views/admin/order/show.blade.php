@@ -21,10 +21,6 @@
                         <div class="col-12 col-md-4">
                             <table class="table table-bordered">
                                 <tr>
-                                    <th class="bg-success">ID</th>
-                                    <td>{{ $order->id }}</td>
-                                </tr>
-                                <tr>
                                     <th class="bg-success">注文番号</th>
                                     <td>{{ $order->serialnumber }}</td>
                                 </tr>

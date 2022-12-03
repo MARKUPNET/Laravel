@@ -18,12 +18,18 @@ class ProductSeeder extends Seeder
         DB::table('products')->insert([
             [
                 'name' => 'かりんとう饅頭',
+                'created_at' => '2022-11-28 00:00:00',
+                'updated_at' => '2022-11-28 00:00:00',
             ],
             [
                 'name' => 'ながぬま ふ輪っと',
+                'created_at' => '2022-11-28 00:00:00',
+                'updated_at' => '2022-11-28 00:00:00',
             ],
             [
                 'name' => 'あかねいろマドレーヌ',
+                'created_at' => '2022-11-28 00:00:00',
+                'updated_at' => '2022-11-28 00:00:00',
             ],
 
         ]);
