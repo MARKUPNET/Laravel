@@ -138,7 +138,7 @@
                         </div>
 
                         <div class="mt-3">
-                            <button class="btn btn-primary">更新する</button>
+                            <button type="submit" class="btn btn-primary">更新する</button>
                         </div>
 
                     </form>

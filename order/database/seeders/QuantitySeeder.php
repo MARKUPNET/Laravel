@@ -25,14 +25,14 @@ class QuantitySeeder extends Seeder
             ],
             [
                 'orders_id' => '2',
-                'items_id' => '1',
+                'items_id' => '8',
                 'quantity' => '1',
                 'created_at' => '2022-11-02 00:00:00',
                 'updated_at' => '2022-11-02 00:00:00',
             ],
             [
                 'orders_id' => '2',
-                'items_id' => '2',
+                'items_id' => '9',
                 'quantity' => '1',
                 'created_at' => '2022-11-02 00:00:00',
                 'updated_at' => '2022-11-02 00:00:00',

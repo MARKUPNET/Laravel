@@ -107,7 +107,7 @@ return [
     */
 
     'preloader' => [
-        'enabled' => true,
+        'enabled' => false,
         'img' => [
             'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
             'alt' => 'AdminLTE Preloader Image',
@@ -312,8 +312,15 @@ return [
         //     'can'  => 'manage-blog',
         // ],
         [
-            'text'        => 'dashbord',
+            'text'        => 'ダッシュボード',
             'url'         => 'admin',
+            'icon'        => 'far fa-fw fa-file',
+            // 'label'       => 4,
+            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'ご注文一覧',
+            'url'         => 'admin/order/',
             'icon'        => 'far fa-fw fa-file',
             // 'label'       => 4,
             'label_color' => 'success',

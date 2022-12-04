@@ -12,7 +12,7 @@
             <div class="col-12">
 
                 <div class="mt-3">
-                    <a href="{{ route('admin.index') }}" class="btn btn-primary">戻る</a>
+                    <a href="{{ route('order.index') }}" class="btn btn-secondary">ご注文一覧へ戻る</a>
                 </div>
 
                 <div class="mt-3">
@@ -38,7 +38,7 @@
 
                             <div>
                                 <h4>■商品名</h4>
-                                <h4 class="pl-3">{{ $order->products->name }}</h4>
+                                <h3 class="pl-3">{{ $order->products->name }}</h3>
                             </div>
 
                             <div class="mt-5">
@@ -47,6 +47,7 @@
                                     <thead class="thead-dark">
                                         <tr>
                                             <th>商品名</th>
+                                            <th>単価</th>
                                             <th class="text-center">数量</th>
                                         </tr>
                                     </thead>
@@ -54,14 +55,15 @@
                                         @foreach($quantities as $quantity)
                                         <tr>
                                             <td>{{ $quantity->items->name }}</td>
+                                            <td>{{ $quantity->items->price }}</td>
                                             <td class="text-center">{{ $quantity->quantity }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
                                     <tfoot>
                                         <tr class="table-dark">
-                                            <th>合計金額</th>
-                                            <td class="text-center">{{ number_format($order->pricesum) }}</td>
+                                            <th colspan="2">合計金額</th>
+                                            <td class="text-center">{{ number_format($priceSum) }}</td>
                                         </tr>
                                     </tfoot>
                                 </table>

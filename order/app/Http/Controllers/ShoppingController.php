@@ -181,7 +181,6 @@ class ShoppingController extends Controller
         $order->noshis_id       = $noshi->id;
         $order->deliveries_id   = $delivery->id;
         $order->guests_id       = $guest->id;
-        $order->pricesum        = str_replace(',', '',$inputs['pricesum']);
         $order->save();
 
         //サイズ・数量

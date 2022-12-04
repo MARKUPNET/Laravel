@@ -1,3 +1,43 @@
+.h3, h3 {
+    font-size: 1.4rem;
+}
+
+.h4, h4 {
+    font-size: 1.2rem;
+}
+
 .w180px{
-    width: 180px;
+    width: 190px;
+}
+
+.content-wrapper>.content{
+    padding-bottom: 5rem;
+}
+
+.filter{
+
+    &__block{
+        width: 440px;
+    }
+
+    &__item{
+
+        dt{
+            width: 70px;
+        }
+
+        dd{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            width: calc( 100% - 70px );
+
+            select[name="pName"]{
+                width: auto;
+            }
+        }
+
+    }
+
+
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Order;
+use App\Models\Product;
+use App\Models\Quantity;
 
 class AdminController extends Controller
 {
@@ -25,11 +27,25 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-        $orders = Order::with(['products', 'noshis', 'deliveries', 'guests'])
-            ->orderBy('created_at')
-            ->get();
 
-        return view('admin/index', compact( 'orders', 'request' ))
+        $query = Order::with(['products', 'noshis', 'deliveries', 'guests']);
+
+        $orders = $query->orderBy('created_at', 'DESC')->paginate(20);
+
+        //　合計金額
+        foreach( $orders as $order ){
+            $query = Quantity::with(['items'])
+                ->where('orders_id', $order->id)
+                ->get();
+
+            $priceSum[$order->id] = 0;
+            foreach( $query as $quantity ){
+                $priceSum[$order->id] = $priceSum[$order->id] + $quantity->quantity * $quantity->items->price;
+            }
+        }
+
+
+        return view('admin/index', compact( 'orders', 'priceSum' ))
             ->with('page_id', request()->page_id);
     }
 }

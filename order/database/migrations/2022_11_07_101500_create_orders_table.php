@@ -30,8 +30,6 @@ return new class extends Migration
             $table->unsignedBigInteger('guests_id')->comment('顧客ID');
             $table->foreign('guests_id')->references('id')->on('guests');
 
-            $table->integer('pricesum')->comment('合計金額');
-
             $table->timestamps();
         });
     }

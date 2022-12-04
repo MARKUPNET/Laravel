@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\Quantity;
 use Illuminate\Http\Request;
 
 class QuantityController extends Controller
@@ -56,7 +58,12 @@ class QuantityController extends Controller
      */
     public function edit($id)
     {
-        return view('/admin/quantity/edit');
+
+        $order = Order::where('id', $id)->first();
+
+        $quantities = Quantity::where('orders_id', $id)->get();
+
+        return view('/admin/quantity/edit', compact('order', 'quantities'));
     }
 
     /**
@@ -66,9 +73,22 @@ class QuantityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Quantity $quantity)
     {
         //
+
+        $request->validate([
+            'quantity'      => 'required',
+        ]);
+
+        $quantity->orders_id     = $request->input(["orders_id"]);
+        $quantity->items_id      = $request->input(["items_id"]);
+        $quantity->quantity      = $request->input(["quantity"]);
+        $quantity->save();
+
+        return redirect()->route('quantity.edit')
+            ->with('success', '登録しました。');
+
     }
 
     /**
