@@ -1,10 +1,21 @@
-# ファイルやディレクトリが存在すれば表示　【解説】スラッシュ付与後だと判定できないので最初にチェック
-RewriteCond %{REQUEST_FILENAME} -d [OR]
-RewriteCond %{REQUEST_FILENAME} -f
-RewriteRule ^ - [L]
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
 
-# add Trailing Slash　　　　　　　【解説】URLの末尾に/がなければ付与してリダイレクト　←これで解決
-RewriteRule ^(.+[^/])$ /$1/ [R=301,L]
+    RewriteEngine On
 
-# Handle Front Controller...
-RewriteRule ^ index.php [L]
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>

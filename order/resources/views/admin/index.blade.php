@@ -46,7 +46,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="{{ config('app.url') }}/css/admin.css">
 @stop
 
 @section('js')
