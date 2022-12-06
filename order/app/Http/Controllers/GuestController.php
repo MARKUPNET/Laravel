@@ -60,7 +60,7 @@ class GuestController extends Controller
     {
         $guest = Guest::where('id', $id)->first();
 
-        return view('/admin/guest/edit', compact('guest'));
+        return view('/admin/guest/edit', compact('guest', 'id'));
     }
 
     /**

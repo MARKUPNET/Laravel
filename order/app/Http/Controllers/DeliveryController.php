@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Delivery;
+
 class DeliveryController extends Controller
 {
     /**
@@ -56,7 +58,9 @@ class DeliveryController extends Controller
      */
     public function edit($id)
     {
-        return view('/admin/delivery/edit');
+        $delivery = Delivery::where('id', $id)->first();
+
+        return view('/admin/delivery/edit', compact('delivery', 'id'));
     }
 
     /**
@@ -66,9 +70,36 @@ class DeliveryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Delivery $delivery)
     {
-        //
+        $delivery->status    = $request->input(["status"]);
+
+        if( $delivery->status == 0 ){
+
+            $delivery->name    = null;
+            $delivery->kana    = null;
+            $delivery->phone   = null;
+            $delivery->zip     = null;
+            $delivery->pref    = null;
+            $delivery->addr    = null;
+            $delivery->addr2    = null;
+
+        }else{
+
+            $delivery->name    = $request->input(["name"]);
+            $delivery->kana    = $request->input(["kana"]);
+            $delivery->phone   = $request->input(["phone"]);
+            $delivery->zip     = $request->input(["zip"]);
+            $delivery->pref    = $request->input(["pref"]);
+            $delivery->addr    = $request->input(["addr"]);
+            $delivery->addr2    = $request->input(["addr2"]);
+
+        }
+
+        $delivery->save();
+
+        return redirect()->route('delivery.edit', $delivery->id)
+            ->with('success', '登録しました。');
     }
 
     /**

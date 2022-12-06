@@ -12,7 +12,7 @@
             <div class="col-12 col-md-6">
 
                 <div class="mt-3">
-                    <a href="#" onClick="history.back(); return false;" class="btn btn-primary">戻る</a>
+                    <a href="{{ route('order.show', $id ) }}" class="btn btn-primary">戻る</a>
                 </div>
 
                 <div class="mt-3">

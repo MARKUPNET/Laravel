@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Noshi;
+
 class NoshiController extends Controller
 {
     /**
@@ -56,7 +58,9 @@ class NoshiController extends Controller
      */
     public function edit($id)
     {
-        return view('/admin/noshi/edit');
+        $noshi = Noshi::where('id', $id)->first();
+
+        return view('/admin/noshi/edit', compact('noshi', 'id'));
     }
 
     /**
@@ -66,9 +70,33 @@ class NoshiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Noshi $noshi)
     {
-        //
+
+        $noshi->status    = $request->input(["status"]);
+
+        if( $noshi->status == 0 ){
+
+            $noshi->type    = null;
+            $noshi->color    = null;
+            $noshi->position   = null;
+            $noshi->name     = null;
+            $noshi->note    = null;
+
+        }else{
+
+            $noshi->type    = $request->input(["type"]);
+            $noshi->color    = $request->input(["color"]);
+            $noshi->position   = $request->input(["position"]);
+            $noshi->name     = $request->input(["name"]);
+            $noshi->note    = $request->input(["note"]);
+
+        }
+
+        $noshi->save();
+
+        return redirect()->route('noshi.edit', $noshi->id)
+            ->with('success', '登録しました。');
     }
 
     /**
