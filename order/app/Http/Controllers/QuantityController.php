@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Item;
 use App\Models\Quantity;
 use Illuminate\Http\Request;
 
@@ -73,20 +74,25 @@ class QuantityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Quantity $quantity)
+    public function update(Request $request, $id)
     {
-        //
 
-        $request->validate([
-            'quantity'      => 'required',
-        ]);
+        $inputs = $request->all();
 
-        $quantity->orders_id     = $request->input(["orders_id"]);
-        $quantity->items_id      = $request->input(["items_id"]);
-        $quantity->quantity      = $request->input(["quantity"]);
-        $quantity->save();
+        foreach( $inputs as $key => $value ){
 
-        return redirect()->route('quantity.edit')
+
+            if(strpos($key,'item_id_') !== false){
+
+                $quantity_id = str_replace('item_id_', '', $key);
+
+                $quantity = Quantity::find($quantity_id);
+                $quantity->quantity = $value;
+                $quantity->save();
+            }
+        }
+
+        return redirect()->route('order.show', $id)
             ->with('success', '登録しました。');
 
     }
@@ -94,11 +100,13 @@ class QuantityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Quantity  $quantity
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Quantity $quantity, $id)
     {
-        //
+        $quantity->delete();
+        return redirect()->route('quantity.edit', $id)
+            ->with('success', '削除しました。');
     }
 }

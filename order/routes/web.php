@@ -41,3 +41,4 @@ Route::post('/admin/delivery/edit/{delivery}', [App\Http\Controllers\DeliveryCon
 
 Route::get('/admin/quantity/edit/{quantity}', [App\Http\Controllers\QuantityController::class, 'edit'])->name('quantity.edit');
 Route::post('/admin/quantity/edit/{quantity}', [App\Http\Controllers\QuantityController::class, 'update'])->name('quantity.update');
+Route::delete('/admin/quantity/delete/{quantity}', [App\Http\Controllers\QuantityController::class, 'destroy'])->name('quantity.destroy');
