@@ -51,13 +51,8 @@
                     noEventsContent: 'スケジュールはありません',
                     eventSources: [
                         {
-                            url: '/getbookings',
+                            url: 'https://markupnet.jp/portfolio/laravel_booking/public/getbookings',
                         },
-                        {
-                            googleCalendarApiKey: 'ここにAPIキーが入ります',
-                            googleCalendarId: 'japanese__ja@holiday.calendar.google.com',
-                            display: 'background',
-                        }
                     ],
                     eventSourceFailure () {
                         console.error('エラーが発生しました。');
