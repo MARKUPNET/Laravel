@@ -18,6 +18,53 @@
 
         <div class="row">
             <div class="col-12">
+                <div class="mt-3 filter">
+                    <form action="{{ route('booking.index') }}" method="get">
+                        <span class="date-form">
+                            <select id="year" name="year">
+                                <option value="">---</option>
+                                <?php $years = array_reverse(range(today()->year - 8, today()->year)); ?>
+                                @foreach($years as $year)
+                                  <option
+                                      value="{{ $year }}"
+                                      {{ $filter['year'] == $year ? 'selected' : '' }}
+                                  >{{ $year }}</option>
+                                @endforeach
+                            </select>
+                            <label for="year">年</label>
+                        </span>
+                        <span class="date-form">
+                            <select id="month" name="month">
+                                <option value="">---</option>
+                                @foreach(range(1, 12) as $month)
+                                  <option
+                                      value="{{ $month }}"
+                                      {{ $filter['month'] == $month ? 'selected' : '' }}
+                                  >{{ $month }}</option>
+                                @endforeach
+                            </select>
+                            <label for="month">月</label>
+                        </span>
+                        <span class="date-form">
+                            <select id="day" name="day" data-old-value="{{ $filter['day'] }}">
+                                <option value="">---</option>
+                                @foreach(range(1, 31) as $day)
+                                  <option
+                                      value="{{ $day }}"
+                                      {{ $filter['day'] == $day ? 'selected' : '' }}
+                                  >{{ $day }}</option>
+                                @endforeach
+                            </select>
+                            <label for="day">日</label>
+                        </span>
+                        <button class="button-secondary" name="action" value="select">日付選択</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
                 @if( $message = Session::get('success'))
                 <div class="alert alert-success mt-3"><p>{{ $message }}</p></div>
                 @endif
@@ -26,9 +73,9 @@
 
         @if ( count($bookings) > 0 )
 
-            <div class="card mt-3 p-2">
-                <table class="table table-bordered table-hover">
-                    <thead>
+            <div class="card mt-3 p-3">
+                <table class="m-0 table table-bordered table-hover">
+                    <thead class="thead-dark">
                         <tr>
                             <th>ID</th>
                             <th>予約日</th>
@@ -66,7 +113,7 @@
             {!! $bookings->links('pagination::bootstrap-5') !!}
 
         @else
-            <p>データが存在しません</p>
+            <p class="mt-3">データが存在しません</p>
         @endif
 
     </div>
@@ -77,5 +124,35 @@
 @stop
 
 @section('js')
+<script>
+    function setDay() {
+        // 年の値を取得
+        const yearVal = document.getElementById('year').value;
+        // 月の値を取得
+        const monthVal = document.getElementById('month').value;
+        // 日のセレクトボックスに挿入するHTML
+        let html = '<option value="">---</option>';
+        // 年月が有効な値の場合のみ日付の選択肢を加える
+        if (yearVal !== '' && monthVal !== '') {
+          // 特定の年月の最後の日付を取得する
+          const lastDay = (new Date(yearVal, monthVal, 0)).getDate();
 
+          // optionを組み立てる
+          for (let day = 1; day <= lastDay; day++) {
+            html += '<option value="' + day + '">' + day + '</option>';
+          }
+        }
+        document.getElementById('day').innerHTML = html;
+      };
+
+      window.onload = function () {
+        document.getElementById('year').addEventListener('change', setDay);
+        document.getElementById('month').addEventListener('change', setDay);
+
+        // リダイレクトした場合に元の入力値を復元する
+        const dayElem = document.getElementById('day');
+        dayElem.value = dayElem.getAttribute('data-old-value');
+      }
+
+</script>
 @stop

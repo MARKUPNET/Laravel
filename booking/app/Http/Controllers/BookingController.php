@@ -29,11 +29,30 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $bookings = Booking::orderBy('id', 'desc')->paginate(5);
 
-        return view('/admin/booking/index', compact('bookings'))
+        $filter['year']   = $request['year'];
+        $filter['month']  = $request['month'];
+        $filter['day']    = $request['day'];
+
+        $query = Booking::with(['guest']);
+
+        if (isset($filter['year'])) {
+            $query->whereYear('date', $filter['year']);
+        }
+
+        if (isset($filter['month'])) {
+            $query->whereMonth('date', $filter['month']);
+        }
+
+        if (isset($filter['day'])) {
+            $query->whereDay('date', $filter['day']);
+        }
+
+        $bookings = $query->orderBy('id', 'desc')->paginate(5);
+
+        return view('/admin/booking/index', compact('bookings', 'filter'))
             ->with('page_id', request()->page_id)
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }

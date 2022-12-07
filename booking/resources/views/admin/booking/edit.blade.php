@@ -42,11 +42,7 @@
                                         <select name="time_id" class="form-control">
                                             <option value="">選択してください</option>
                                             @foreach($times as $time)
-                                            @if( $time->id == $booking->time_id )
-                                            <option value="{{ $time->id }}" selected>{{ $time->timeslot }}</option>
-                                            @else
-                                            <option value="{{ $time->id }}">{{ $time->timeslot }}</option>
-                                            @endif
+                                            <option value="{{ $time->id }}" @if( $time->id == $booking->time_id ) selected @endif>{{ $time->timeslot }}</option>
                                             @endforeach
                                         </select>
                                         @error('time_id')
@@ -65,11 +61,7 @@
                                         <select name="plan_id" class="form-control">
                                             <option value="">選択してください</option>
                                             @foreach($plans as $plan)
-                                            @if( $plan->id == $booking->plan_id )
-                                            <option value="{{ $plan->id }}" selected>{{ $plan->name }}</option>
-                                            @else
-                                            <option value="{{ $plan->id }}">{{ $plan->name }}</option>
-                                            @endif
+                                            <option value="{{ $plan->id }}" @if( $plan->id == $booking->plan_id ) selected @endif>{{ $plan->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('plan_id')
