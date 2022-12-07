@@ -21,6 +21,7 @@
         <script src="{{ asset('fullcalendar-5.11.3/lib/main.js') }}"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
+                var url = "{{ config('APP.URL') }}";
                 var calendarEl = document.getElementById('calendar');
                 var calendar = new FullCalendar.Calendar(calendarEl, {
                     initialView: 'dayGridMonth',
@@ -51,7 +52,7 @@
                     noEventsContent: 'スケジュールはありません',
                     eventSources: [
                         {
-                            url: 'https://markupnet.jp/portfolio/laravel_booking/public/getbookings',
+                            url: url + '/getbookings',
                         },
                     ],
                     eventSourceFailure () {
