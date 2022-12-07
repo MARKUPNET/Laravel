@@ -21,7 +21,7 @@
         <script src="{{ asset('fullcalendar-5.11.3/lib/main.js') }}"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                var url = "{{ config('APP.URL') }}";
+                var url = "{{ config('app.url') }}";
                 var calendarEl = document.getElementById('calendar');
                 var calendar = new FullCalendar.Calendar(calendarEl, {
                     initialView: 'dayGridMonth',
