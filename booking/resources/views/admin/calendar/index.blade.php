@@ -21,7 +21,6 @@
         <script src="{{ asset('fullcalendar-5.11.3/lib/main.js') }}"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                var url = "{{ config('app.url') }}";
                 var calendarEl = document.getElementById('calendar');
                 var calendar = new FullCalendar.Calendar(calendarEl, {
                     initialView: 'dayGridMonth',
@@ -52,7 +51,7 @@
                     noEventsContent: 'スケジュールはありません',
                     eventSources: [
                         {
-                            url: url + '/getbookings',
+                            url: '/getbookings',
                         },
                     ],
                     eventSourceFailure () {
