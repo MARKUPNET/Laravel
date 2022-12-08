@@ -25,7 +25,7 @@
 	<!-- for Bootstrap 5 -->
 
     <!-- css-->
-    <link href="{{ config('app.url', 'Laravel') }}:8000/css/style.css" rel="stylesheet">
+    <link href="{{ config('app.utl') }}/css/style.css" rel="stylesheet">
     @yield('css')
 	<!-- css-->
 
